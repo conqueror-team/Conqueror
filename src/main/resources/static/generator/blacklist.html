@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>黑名单</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link rel="stylesheet" href="../public/css/bootstrap.min.css">
+<link rel="stylesheet" href="../public/css/font-awesome.min.css">
+<link rel="stylesheet" href="../public/plugins/jqgrid/ui.jqgrid-bootstrap.css">
+<link rel="stylesheet" href="../public/plugins/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" href="../public/css/main.css">
+<!--全局公用样式-->
+<link rel="stylesheet" type="text/css" href="../public/css/globle.css" />
+
+<script src="../public/libs/jquery.min.js"></script>
+<script src="../public/plugins/layer/layer.js"></script>
+<script src="../public/libs/bootstrap.min.js"></script>
+<script src="../public/libs/vue.min.js"></script>
+<script src="../public/plugins/jqgrid/grid.locale-cn.js"></script>
+<script src="../public/plugins/jqgrid/jquery.jqGrid.min.js"></script>
+<script src="../public/plugins/ztree/jquery.ztree.all.min.js"></script>
+<script src="../public/js/common.js"></script>
+<script src="../public/js/sys/cos-js-sdk-v5.min.js"></script>
+<script src="../public/libs/webuploader.min.js"></script>
+<script src="../public/libs/diyUpload.js"></script>
+
+<!-- 图片样式 -->
+<style>
+	.simulation_img{
+		margin: auto;
+		width: 200px;
+		height: 300px;
+	}
+	.album{
+		position: fixed;
+		left:0;
+		bottom: 0;
+		width: 100%;
+		height: 1000px;
+		background: #d9d9d9;
+		opacity: .97;
+		display: none;
+	}
+	.album img{
+		opacity: 1;
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 5%;
+		margin: 0 auto;
+	}
+</style>
+</head>
+<body>
+<div id="rrapp" v-cloak>
+	<div v-show="showList">
+		<div class="grid-btn">
+			<div class="form-group col-sm-2">
+				<input type="text" class="form-control" v-model="q.name" @keyup.enter="query" placeholder="用户名">
+			</div>
+			<div class="form-group col-sm-1">
+				<select class="form-control" v-model="q.status" @keyup.enter="query">
+					<option value="">状态</option>
+					<option value="1">正常</option>
+					<option value="0">删除</option>
+				</select>
+			</div>
+			<a class="btn btn-default" @click="query">查询</a>
+			<a v-if="hasPermission('blacklist:save')" class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+			<a v-if="hasPermission('blacklist:update')" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+			<a v-if="hasPermission('blacklist:delete')" class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+		</div>
+	    <table id="jqGrid"></table>
+	    <div id="jqGridPager"></div>
+    </div>
+    
+    <div v-show="!showList" class="panel panel-default">
+		<div class="panel-heading">{{title}}</div>
+		<form class="form-horizontal" style="width: 100%;">
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">角色或冒险团名称</div>
+			   	<div class="col-sm-2">
+			      <input type="text" class="form-control" v-model="blackList.name" placeholder="角色或冒险团名称"/>
+			    </div>
+			</div>
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">冒险团名称</div>
+			   	<div class="col-sm-2">
+			      <input type="text" class="form-control" v-model="blackList.groupName" placeholder="冒险团名称"/>
+			    </div>
+			</div>
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">严重程度</div>
+			   	<div class="col-sm-2">
+			   		<select class="form-control" v-model="blackList.severity">
+					<option value="1">一般</option>
+					<option value="2">较重</option>
+					<option value="3">严重</option>
+					<option value="4">特别严重</option>
+				</select>
+			    </div>
+			</div>
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">证据图片</div>
+			   	<div class="col-sm-10">
+			       <input type="text" class="form-control" v-model="blackList.imgUrl" id="imgUrl" style="display: none;" placeholder="图片地址"/>
+			      <!--<input id="file-selector" type="file"  multiple="multiple"> -->
+			     <div>
+				    <ul class="upload-ul clearfix">
+				        <li class="upload-pick">
+				            <div class="webuploader-container clearfix" id="goodsUpload"></div>
+				        </li>
+				    </ul>
+				       <span id="ctlBtn_x" class="btn btn-default">确认上传</span>
+				</div>
+			    </div>
+			</div>
+			
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">大区名称</div>
+			   	<div class="col-sm-2">
+			      <select class="form-control" v-model="blackList.regionName" placeholder="大区名称">
+					<option v-for="option in regionNames" v-bind:value="option.value">
+						{{ option.text }}
+					</option>
+				</select>
+			    </div>
+			</div>
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">备注</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="blackList.remarks" placeholder="备注"/>
+			    </div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label"></div> 
+				<input type="button" id="submit" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+				&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+			</div>
+		</form>
+	</div>
+</div>
+	<div class="album">
+		<img src="" alt="" id="showImg">
+	</div>
+	
+<script src="../public/js/generator/blacklist.js"></script>
+<script type="text/javascript">
+var Bucket = 'conqueror-1251711161';
+var Region = 'ap-chengdu';
+// 初始化实例
+var cos = new COS({
+    getAuthorization: function (options, callback) {
+        // 异步获取签名
+        $.get('http://bl.dnfzhengfuzhe.com/app/auth/get', {
+            method: (options.Method || 'get').toLowerCase(),
+            pathname: '/' + (options.Key || '')
+        }, function (authorization) {
+            callback(authorization);
+        }, 'text');
+    }
+});
+
+ 
+//上传图片
+ var $tgaUpload = $('#goodsUpload').diyUpload({
+	buttonText : '',
+	accept: {
+		title: "Images",
+		extensions: 'gif,jpg,jpeg,bmp,png'
+	},
+	thumb:{
+		width:120,
+		height:90,
+		// 图片质量，只有type为`image/jpeg`的时候才有效。
+		quality:100,
+		// 是否允许放大，如果想要生成小图的时候不失真，此选项应该设置为false.
+		allowMagnify:false,
+		// 是否允许裁剪。
+		crop:true,
+		// 如果发现压缩后文件大小比原来还大，则使用原来图片
+	    // 此属性可能会影响图片自动纠正功能
+		noCompressIfLarger: false,
+		compress:false,
+		type:"image/jpeg"
+	},
+	fileNumLimit:10
+}); 
+window.$tgaUpload=$tgaUpload;
+
+$("#ctlBtn_x").click(function(){
+	var files=$tgaUpload.getFiles();
+	if(files.length<=0){
+		alert('请选择图片！');
+		return;
+	}
+	confirm('确认上传图片？上传后无法修改，请一次性选择完整。', function(){
+		alert('上传中...');
+		var isBoolean=true;
+		var ij=1;
+	for(var i=0;i<files.length;i++){
+		var file=files[i].getSource().source;
+		var timestamp=$.now()+i;
+		 var index = file.name.lastIndexOf(".");
+		 var ext = file.name.substr(index);
+		var fileName=timestamp+ext;
+		cos.sliceUploadFile({
+	        Bucket: Bucket,
+	        Region: Region,
+	        Key: fileName,
+	        Body: file,
+	    }, function (err, data) {
+	        console.log(err, data);
+	        if(typeof(data)=="undefined"){
+	        	isBoolean=false;
+	        }else{
+	        	if($("#imgUrl").val()==''){
+	        		$("#imgUrl").val(data.Key);
+	        	}else{
+	        		$("#imgUrl").val($("#imgUrl").val()+","+data.Key);
+	        	}
+	        }
+	        if(isBoolean&&files.length==ij){
+	    		$(".diyControl").remove();
+	        	$("#ctlBtn_x").hide();
+	    		alert('上传成功');
+	        }else if(!isBoolean&&files.length==ij){
+	    		alert('上传失败');
+	    	}
+	        ij++;
+	    }); 
+	}
+	});
+}); 
+
+$("#aa").click(function(){
+	var params = {
+	  Bucket : Bucket,                        /* 必须 */
+	  Region : Region,                        /* 必须 */
+	  Key : 'STRING_VALUE'                            /* 必须 */
+	};
+
+	cos.deleteObject(params, function(err, data) {
+	  if(err) {
+	    console.log(err);
+	  } else {
+	    console.log(data);
+	  }
+	});
+});
+
+// 监听选文件
+/*  document.getElementById('file-selector').onchange = function () {
+	console.log(this.files.lenth);
+	$("#submit").val('图片上传中...');
+	$("#submit").attr('disabled',true);
+	 for(var j=0;j<this.files.length;j++){
+	    var file = this.files[j];
+	    if (!file) return;
+	    var fileType = ["jpg","png","gif"];
+		 //取出上传文件的扩展名
+		 var index = file.name.lastIndexOf(".");
+		 var ext = file.name.substr(index+1);
+		  //循环比较
+		 var flag=false;
+		  for(var i=0;i<fileType.length;i++){
+		   if(ext == fileType[i]){
+		    flag = true; //一旦找到合适的，立即退出循环
+		    break;
+		   }
+		  }
+		  //条件判断
+		  if(!flag){ alert('只能上传jpg、png、gif'); return;}
+	    // 分片上传文件
+	    
+	     cos.sliceUploadFile({
+	        Bucket: Bucket,
+	        Region: Region,
+	        Key: file.name,
+	        Body: file,
+	    }, function (err, data) {
+	        console.log(err, data);
+	        if(typeof(data)=="undefined"){
+	        	alert('上传失败');
+	        }else{
+	        	if($("#imgUrl").val()==''){
+	        		$("#imgUrl").val("http://"+data.Location);
+	        	}else{
+	        		$("#imgUrl").val($("#imgUrl").val()+","+"http://"+data.Location);
+	        	}
+	        }
+	    }); 
+	 }
+	 $("#submit").attr('disabled',false);
+	 $("#submit").val('确定');
+};  */
+</script>
+</body>
+</html>
