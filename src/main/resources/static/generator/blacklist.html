@@ -57,7 +57,7 @@
 	<div v-show="showList">
 		<div class="grid-btn">
 			<div class="form-group col-sm-2">
-				<input type="text" class="form-control" v-model="q.name" @keyup.enter="query" placeholder="用户名">
+				<input type="text" class="form-control" v-model="q.name" @keyup.enter="query" placeholder="角色或冒险团名称">
 			</div>
 			<div class="form-group col-sm-1">
 				<select class="form-control" v-model="q.status" @keyup.enter="query">
@@ -79,9 +79,9 @@
 		<div class="panel-heading">{{title}}</div>
 		<form class="form-horizontal" style="width: 100%;">
 			<div class="form-group">
-			   	<div class="col-sm-2 control-label">角色或冒险团名称</div>
+			   	<div class="col-sm-2 control-label">角色名称</div>
 			   	<div class="col-sm-2">
-			      <input type="text" class="form-control" v-model="blackList.name" placeholder="角色或冒险团名称"/>
+			      <input type="text" class="form-control" v-model="blackList.name" placeholder="角色名称"/>
 			    </div>
 			</div>
 			<div class="form-group">
