@@ -43,7 +43,7 @@ public class APIBlackListController {
 			@ApiParam("条数") @RequestParam(defaultValue = "10", required = false) Integer limit){
 		Map<String, Object> params=new HashMap<>();
 		params.put("name", name);
-		params.put("status", status);
+		params.put("status", status+"");
 		params.put("page", page);
 		params.put("limit", limit);
 		params.put("sidx", "");
