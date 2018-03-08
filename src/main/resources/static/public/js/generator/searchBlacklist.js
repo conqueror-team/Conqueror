@@ -3,10 +3,10 @@ $(function () {
         url: '../blacklist/list',
         datatype: "json",
         colModel: [			
-			{ label: 'id', name: 'id', index: 'id', width: 50, key: true,hidden:true },
-			{ label: '角色名称', name: 'name', index: 'name', width: 80 }, 			
-			{ label: '冒险团名称', name: 'groupName', index: 'group_name', width: 80 }, 			
-			{ label: '图片', name: 'imgUrl', width: 140, formatter: function(value, options, row){
+			
+			{ label: '角色名称', name: 'name', index: 'name', width: 80 ,sortable: false}, 			
+			{ label: '冒险团名称', name: 'groupName', index: 'group_name', width: 80,sortable: false }, 			
+			{ label: '图片', name: 'imgUrl', width: 140,sortable: false, formatter: function(value, options, row){
 				if(value!=null&&value!=''){
 					var imgs=value.split(',');
 					var imgHtml='<ul class="nav navbar-nav">';
@@ -18,7 +18,7 @@ $(function () {
 				}
 				return '<span class="label label-danger">暂无图片</span>';
 			}},
-			{ label: '严重程度', name: 'severity', width: 80, formatter: function(value, options, row){
+			{ label: '严重程度', name: 'severity', width: 80,sortable: false, formatter: function(value, options, row){
 				if(value===1){
 					return'<span class="label label-default" style="background-color:#f0ae2e">一般</span>';
 				}else if(value===2){
@@ -31,22 +31,23 @@ $(function () {
 					return'<span class="label label-default">未知</span>';
 				}
 			}},
-			{ label: '大区名称', name: 'regionName', index: 'region_name', width: 80 }, 			
-			{ label: '备注', name: 'remarks', index: 'remarks', width: 80 },
-			{ label: '状态', name: 'status', width: 80, formatter: function(value, options, row){
+			{ label: '大区名称', name: 'regionName', index: 'region_name', width: 80,sortable: false }, 			
+			{ label: '备注', name: 'remarks', index: 'remarks', width: 80,sortable: false },
+			{ label: '状态', name: 'status', width: 80,sortable: false, formatter: function(value, options, row){
 				return value === 0 ? 
 					'<span class="label label-danger">禁用</span>' : 
 					'<span class="label label-success">正常</span>';
 			}},
 			
-			{ label: '创建人', name: 'createUserName', width: 80 }, 			
-			{ label: '创建时间', name: 'createTime', index: 'create_time', width: 80 }			
+			{ label: '创建人', name: 'createUserName', width: 80,sortable: false }, 			
+			{ label: '创建时间', name: 'createTime', index: 'create_time', width: 80,sortable: false }			
         ],
+        sortable: false,
 		viewrecords: true,
-        height: 700,
+        height: 650,
         rowNum: 5,
 		rowList : [5,10,30],
-        rownumbers: true, 
+        rownumbers: false, 
         rownumWidth: 25, 
         autowidth:true,
 //        multiselect: true,

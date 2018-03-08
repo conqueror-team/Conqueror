@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="../public/plugins/ztree/css/metroStyle/metroStyle.css">
 <link rel="stylesheet" href="../public/css/all-skins.min.css">
 <link rel="stylesheet" href="../public/css/main.css">
+<link rel="stylesheet" href="../public/css/style.css">
    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -44,11 +45,38 @@
 		bottom: 5%;
 		margin: 0 auto;
 	}
+	.ui-jqgrid tr.jqgrow td {
+white-space: normal !important;
+height:auto;
+}
 </style>
 </head>
-<body>
+<body >
+ <div class="header" id="home">  	   
+	        <div class="header_top">
+	        	<div class="wrap">	      	   
+		 	     <div class="logo">
+		 	     <div class="menu">
+						  <a class="toggleMenu" href="#"></a>
+						    <ul class="nav" id="nav">
+						    	<li><a href="../index.html">征服者黑名单查询系统</a></li>
+						    	
+							</ul>
+						</div>	
+						<img src="../public/images/log.png" style="width: 58px; height: 58px" alt="" />
+					</div>	
+						<div class="menu">
+						  <a class="toggleMenu" href="#"></a>
+						    <ul class="nav" id="nav">
+						    	<li><a href="../index.html">登录</a></li>
+						    	
+							</ul>
+						</div>							
+	          </div>
+	       </div>
+	   </div>			
 <section class="content" style="background: rgb(255, 255, 255);">
-<div id="rrapp" v-cloak style="width: 90%; margin: 0 auto;padding-top: 40px;">
+<div id="rrapp" v-cloak style="width:90%;margin: 0 auto;padding-top: 20px;">
 	<div v-show="showList">
 		<div class="grid-btn">
 			<div class="form-group col-sm-2">
@@ -70,7 +98,12 @@
 	<div class="album">
 		<img src="" alt="" id="showImg">
 	</div>
-	<script src="../public/libs/jquery.min.js"></script>
+	<div class="copy-right">
+			<div class="wrap">
+				<p class="copy">Conqueror 征服者 </p>
+			</div>
+	  </div>  
+<script src="../public/libs/jquery.min.js"></script>
 <script src="../public/plugins/layer/layer.js"></script>
 <script src="../public/libs/bootstrap.min.js"></script>
 <script src="../public/libs/vue.min.js"></script>
@@ -83,4 +116,5 @@
 <script src="../public/js/generator/searchBlacklist.js"></script>
 </body>
 </section>
+
 </html>
