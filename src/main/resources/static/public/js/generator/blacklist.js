@@ -39,19 +39,19 @@ $(function () {
 					return '';
 				}
 			} },
-			{ label: '状态', name: 'status', width: 80, formatter: function(value, options, row){
+			/*{ label: '状态', name: 'status', width: 80, formatter: function(value, options, row){
 				return value === 0 ? 
 					'<span class="label label-danger">禁用</span>' : 
 					'<span class="label label-success">正常</span>';
-			}},
+			}},*/
 			
 			{ label: '创建人', name: 'createUserName', width: 80 }, 			
 			{ label: '创建时间', name: 'createTime', index: 'create_time', width: 80 }			
         ],
 		viewrecords: true,
         height: 700,
-        rowNum: 5,
-		rowList : [5,10,30],
+        rowNum: 12,
+		rowList : [12,20,30],
         rownumbers: true, 
         rownumWidth: 25, 
         autowidth:true,
@@ -109,10 +109,13 @@ var vm = new Vue({
 			 { text: '西南1区', value: '西南1区' },
 			 { text: '西南2区', value: '西南2区' },
 			 { text: '西南3区', value: '西南3区' },
-			 { text: '云贵1区', value: '云贵1区' },
-			 { text: '云南1区', value: '云南1区' },
 			 { text: '陕西1区', value: '陕西1区' },
-			 { text: '陕西2区', value: '陕西2区' }
+			 { text: '陕西2/3区', value: '陕西2/3区' },
+			 { text: '云南1区', value: '云南1区' },
+			 { text: '贵州1区', value: '贵州1区' },
+			 { text: '云贵1区', value: '云贵1区' },
+			 { text: '新疆1区', value: '新疆1区' }
+			 
 		]
 	},
 	methods: {
@@ -123,6 +126,7 @@ var vm = new Vue({
 			vm.showList = false;
 			vm.title = "新增";
 			vm.blackList = {severity:1,regionName:'重庆1区',};
+			$("#imgUrl").val("")
 			$("#addImgId").show();
 			$("#updateImgId").hide();
 		},
@@ -148,6 +152,30 @@ var vm = new Vue({
 			    success: function(r){
 			    	if(r.code === 0){
 			    		$("#ctlBtn_x").show();
+			    		$(".diyUploadHover").remove();
+			    		$tgaUpload = $('#goodsUpload').diyUpload({
+			    			buttonText : '',
+			    			accept: {
+			    				title: "Images",
+			    				extensions: 'gif,jpg,jpeg,bmp,png'
+			    			},
+			    			thumb:{
+			    				width:120,
+			    				height:90,
+			    				// 图片质量，只有type为`image/jpeg`的时候才有效。
+			    				quality:100,
+			    				// 是否允许放大，如果想要生成小图的时候不失真，此选项应该设置为false.
+			    				allowMagnify:false,
+			    				// 是否允许裁剪。
+			    				crop:true,
+			    				// 如果发现压缩后文件大小比原来还大，则使用原来图片
+			    			    // 此属性可能会影响图片自动纠正功能
+			    				noCompressIfLarger: false,
+			    				compress:false,
+			    				type:"image/jpeg"
+			    			},
+			    			fileNumLimit:10
+			    		}); 
 						alert('操作成功', function(index){
 							vm.reload();
 						});
