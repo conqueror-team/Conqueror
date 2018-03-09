@@ -16,6 +16,9 @@ import com.conqueror.blacklist.service.BlackListService;
 import com.conqueror.blacklist.utils.PageUtils;
 import com.conqueror.blacklist.utils.Query;
 import com.conqueror.blacklist.utils.R;
+import com.conqueror.blacklist.utils.validator.ValidatorUtils;
+import com.conqueror.blacklist.utils.validator.group.AddGroup;
+import com.conqueror.blacklist.utils.validator.group.UpdateGroup;
 
 
 /**
@@ -66,6 +69,7 @@ public class BlackListController extends AbstractController {
 	@RequestMapping("/save")
 	@RequiresPermissions("blacklist:save")
 	public R save(@RequestBody BlackListEntity blackList){
+		ValidatorUtils.validateEntity(blackList, AddGroup.class);
 		blackList.setCreateUserId(getUserId());
 		
 		blackListService.save(blackList);
@@ -79,6 +83,7 @@ public class BlackListController extends AbstractController {
 	@RequestMapping("/update")
 	@RequiresPermissions("blacklist:update")
 	public R update(@RequestBody BlackListEntity blackList){
+		ValidatorUtils.validateEntity(blackList, UpdateGroup.class);
 		blackListService.update(blackList);
 		
 		return R.ok();

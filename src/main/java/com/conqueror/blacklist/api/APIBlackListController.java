@@ -38,12 +38,10 @@ public class APIBlackListController {
 	@GetMapping("/list")
 	public R list(
 			@ApiParam("黑名单名称") @RequestParam(required = false) String name,
-			@ApiParam("状态(1、正常0、删除，不传为全部)") @RequestParam(required = false) Integer status,
 			@ApiParam("页数") @RequestParam(defaultValue = "1", required = false) Integer page,
 			@ApiParam("条数") @RequestParam(defaultValue = "10", required = false) Integer limit){
 		Map<String, Object> params=new HashMap<>();
 		params.put("name", name);
-		params.put("status", status+"");
 		params.put("page", page);
 		params.put("limit", limit);
 		params.put("sidx", "");

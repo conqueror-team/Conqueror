@@ -3,6 +3,11 @@ package com.conqueror.blacklist.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.hibernate.validator.constraints.NotBlank;
+
+import com.conqueror.blacklist.utils.validator.group.AddGroup;
+import com.conqueror.blacklist.utils.validator.group.UpdateGroup;
+
 
 
 /**
@@ -18,16 +23,20 @@ public class BlackListEntity implements Serializable {
 	//主键
 	private Integer id;
 	//角色名称
+	@NotBlank(message="角色名称不能为空", groups = {AddGroup.class, UpdateGroup.class})
 	private String name;
 	//冒险团名称
+	@NotBlank(message="冒险团名称不能为空", groups = {AddGroup.class, UpdateGroup.class})
 	private String groupName;
 	//图片地址
 	private String imgUrl;
 	//大区名称
+	@NotBlank(message="大区名称不能为空", groups = {AddGroup.class, UpdateGroup.class})
 	private String regionName;
 	//严重程度(1、一般2、较重3、严重4、特别严重)
 	private int severity;
 	//备注
+	@NotBlank(message="备注不能为空", groups = {AddGroup.class, UpdateGroup.class})
 	private String remarks;
 	//状态  0：禁用   1：正常
 	private Integer status;
