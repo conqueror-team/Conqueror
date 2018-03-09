@@ -91,21 +91,23 @@
 			<if test="regionName != null">`region_name` = #{regionName}, </if>
 			<if test="remarks != null">`remarks` = #{remarks}, </if>
 			<if test="status != null">`status` = #{status}, </if>
+			<if test="groupName != null">`group_name` = #{groupName}, </if>
+			<if test="severity != null">`severity` = #{severity}, </if>
 			<if test="createUserId != null">`create_user_id` = #{createUserId}, </if>
 			<if test="createTime != null">`create_time` = #{createTime}</if>
 		</set>
 		where id = #{id}
 	</update>
 	
-	<update id="delete">
-		update tb_black_list set status=0 where id = #{value}
-	</update>
+	<delete id="delete">
+		delete from tb_black_list where id = #{value}
+	</delete>
 	
-	<update id="deleteBatch">
-		update tb_black_list set status=0 where id in 
+	<delete id="deleteBatch">
+		delete from  tb_black_list where id in 
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>
-	</update>
+	</delete>
 
 </mapper>

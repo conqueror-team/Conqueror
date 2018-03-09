@@ -33,7 +33,7 @@ $(function () {
 			}},
 			{ label: '大区名称', name: 'regionName', index: 'region_name', width: 80 }, 			
 			{ label: '备注', name: 'remarks', index: 'remarks', width: 180,sortable: false,formatter:function(value, options, row){
-				return '<textarea class="form-control" style="width: 100%;">'+value+'</textarea>';
+				return '<textarea class="form-control" style="width: 100%;" readonly="readonly">'+value+'</textarea>';
 			} },
 			{ label: '状态', name: 'status', width: 80, formatter: function(value, options, row){
 				return value === 0 ? 
@@ -51,7 +51,7 @@ $(function () {
         rownumbers: true, 
         rownumWidth: 25, 
         autowidth:true,
-//        multiselect: true,
+        multiselect: true,
         pager: "#jqGridPager",
         jsonReader : {
             root: "page.list",
@@ -70,6 +70,23 @@ $(function () {
         }
     });
     
+});
+
+
+
+var Bucket = 'conqueror-1251711161';
+var Region = 'ap-chengdu';
+// 初始化实例
+var cos = new COS({
+    getAuthorization: function (options, callback) {
+        // 异步获取签名
+        $.get('http://api.dnfzhengfuzhe.com/app/auth/get', {
+            method: (options.Method || 'get').toLowerCase(),
+            pathname: '/' + (options.Key || '')
+        }, function (authorization) {
+            callback(authorization);
+        }, 'text');
+    }
 });
 
 var vm = new Vue({
@@ -102,6 +119,8 @@ var vm = new Vue({
 			vm.showList = false;
 			vm.title = "新增";
 			vm.blackList = {severity:1,regionName:'重庆1区',};
+			$("#addImgId").show();
+			$("#updateImgId").hide();
 		},
 		update: function (event) {
 			var id = getSelectedRow();
@@ -112,6 +131,8 @@ var vm = new Vue({
             vm.title = "修改";
             
             vm.getInfo(id)
+            $("#addImgId").hide();
+			$("#updateImgId").show();
 		},
 		saveOrUpdate: function (event) {
 			var url = vm.blackList.id == null ? "../blacklist/save" : "../blacklist/update";
@@ -137,28 +158,52 @@ var vm = new Vue({
 			if(ids == null){
 				return ;
 			}
-			
 			confirm('确定要删除选中的记录？', function(){
-				$.ajax({
-					type: "POST",
-				    url: "../blacklist/delete",
-				    data: JSON.stringify(ids),
-				    success: function(r){
-						if(r.code == 0){
-							alert('操作成功', function(index){
-								$("#jqGrid").trigger("reloadGrid");
-							});
-						}else{
-							alert(r.msg);
-						}
-					}
-				});
+				var k=0;
+				for(var j=0;j<ids.length;j++){
+					$.get("../blacklist/info/"+ids[j], function(r){
+						if(r.blackList&&r.blackList.imgUrl){
+							 var imgUrls=r.blackList.imgUrl.split(',');
+							 for(var i=0;i<imgUrls.length;i++){
+								 var params = {
+										  Bucket : Bucket,                        /* 必须 */
+										  Region : Region,                        /* 必须 */
+										  Key : imgUrls[i]                            /* 必须 */
+										};
+								 cos.deleteObject(params, function(err, data) {
+									  if(err) {
+									    console.log(err);
+									  } else {
+									    console.log(data);
+									  }
+									  
+									});
+							 }
+							}
+						if(++k==ids.length){
+							  $.ajax({
+									type: "POST",
+								    url: "../blacklist/delete",
+								    data: JSON.stringify(ids),
+								    success: function(r){
+										if(r.code == 0){
+											alert('操作成功', function(index){
+												$("#jqGrid").trigger("reloadGrid");
+											});
+										}else{
+											alert(r.msg);
+										}
+									}
+								});
+						  }
+		            });
+				}
+				
 			});
 		},
 		getInfo: function(id){
 			$.get("../blacklist/info/"+id, function(r){
                 vm.blackList = r.blackList;
-                vm.blackList.imgUrl="";
             });
 		},
 		reload: function (event) {

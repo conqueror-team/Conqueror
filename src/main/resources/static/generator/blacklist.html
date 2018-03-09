@@ -103,7 +103,7 @@
 			</div>
 			<div class="form-group">
 			   	<div class="col-sm-2 control-label">证据图片</div>
-			   	<div class="col-sm-10">
+			   	<div class="col-sm-10" id="addImgId">
 			       <input type="text" class="form-control" v-model="blackList.imgUrl" id="imgUrl" style="display: none;" placeholder="图片地址"/>
 			      <!--<input id="file-selector" type="file"  multiple="multiple"> -->
 			     <div>
@@ -114,6 +114,9 @@
 				    </ul>
 				       <span id="ctlBtn_x" class="btn btn-default" style="margin-top: -47px;">确认上传</span>
 				</div>
+			    </div>
+			    <div class="col-sm-2" id="updateImgId">
+			    	<span class="form-control">暂不支持图片修改,正在开发中...</span>
 			    </div>
 			</div>
 			
@@ -147,24 +150,9 @@
 	
 <script src="../public/js/generator/blacklist.js"></script>
 <script type="text/javascript">
-var Bucket = 'conqueror-1251711161';
-var Region = 'ap-chengdu';
-// 初始化实例
-var cos = new COS({
-    getAuthorization: function (options, callback) {
-        // 异步获取签名
-        $.get('http://bl.dnfzhengfuzhe.com/app/auth/get', {
-            method: (options.Method || 'get').toLowerCase(),
-            pathname: '/' + (options.Key || '')
-        }, function (authorization) {
-            callback(authorization);
-        }, 'text');
-    }
-});
 
- 
 //上传图片
- var $tgaUpload = $('#goodsUpload').diyUpload({
+var $tgaUpload = $('#goodsUpload').diyUpload({
 	buttonText : '',
 	accept: {
 		title: "Images",
@@ -208,7 +196,7 @@ $("#ctlBtn_x").click(function(){
 		cos.sliceUploadFile({
 	        Bucket: Bucket,
 	        Region: Region,
-	        Key: fileName,
+	        Key: "blacklist/"+fileName,
 	        Body: file,
 	    }, function (err, data) {
 	        console.log(err, data);
@@ -233,68 +221,6 @@ $("#ctlBtn_x").click(function(){
 	}
 	});
 }); 
-
-$("#aa").click(function(){
-	var params = {
-	  Bucket : Bucket,                        /* 必须 */
-	  Region : Region,                        /* 必须 */
-	  Key : 'STRING_VALUE'                            /* 必须 */
-	};
-
-	cos.deleteObject(params, function(err, data) {
-	  if(err) {
-	    console.log(err);
-	  } else {
-	    console.log(data);
-	  }
-	});
-});
-
-// 监听选文件
-/*  document.getElementById('file-selector').onchange = function () {
-	console.log(this.files.lenth);
-	$("#submit").val('图片上传中...');
-	$("#submit").attr('disabled',true);
-	 for(var j=0;j<this.files.length;j++){
-	    var file = this.files[j];
-	    if (!file) return;
-	    var fileType = ["jpg","png","gif"];
-		 //取出上传文件的扩展名
-		 var index = file.name.lastIndexOf(".");
-		 var ext = file.name.substr(index+1);
-		  //循环比较
-		 var flag=false;
-		  for(var i=0;i<fileType.length;i++){
-		   if(ext == fileType[i]){
-		    flag = true; //一旦找到合适的，立即退出循环
-		    break;
-		   }
-		  }
-		  //条件判断
-		  if(!flag){ alert('只能上传jpg、png、gif'); return;}
-	    // 分片上传文件
-	    
-	     cos.sliceUploadFile({
-	        Bucket: Bucket,
-	        Region: Region,
-	        Key: file.name,
-	        Body: file,
-	    }, function (err, data) {
-	        console.log(err, data);
-	        if(typeof(data)=="undefined"){
-	        	alert('上传失败');
-	        }else{
-	        	if($("#imgUrl").val()==''){
-	        		$("#imgUrl").val("http://"+data.Location);
-	        	}else{
-	        		$("#imgUrl").val($("#imgUrl").val()+","+"http://"+data.Location);
-	        	}
-	        }
-	    }); 
-	 }
-	 $("#submit").attr('disabled',false);
-	 $("#submit").val('确定');
-};  */
 </script>
 </body>
 </html>
