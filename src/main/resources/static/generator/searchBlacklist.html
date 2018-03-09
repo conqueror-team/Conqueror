@@ -88,13 +88,6 @@
 			<div class="form-group col-sm-2">
 				<input type="text" class="form-control" v-model="q.name" @keyup.enter="query" placeholder="角色或冒险团名称">
 			</div>
-			<!-- <div class="form-group col-sm-1">
-				<select class="form-control" v-model="q.status" @keyup.enter="query">
-					<option value="">状态</option>
-					<option value="1">正常</option>
-					<option value="0">删除</option>
-				</select>
-			</div> -->
 			<a class="btn btn-default" @click="query">查询</a>
 		</div>
 	    <table id="jqGrid"></table>

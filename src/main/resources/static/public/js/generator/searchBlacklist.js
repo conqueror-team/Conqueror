@@ -39,13 +39,13 @@ $(function () {
 					return '';
 				}
 			} },
-			{ label: '状态', name: 'status', width: 80,sortable: false, formatter: function(value, options, row){
+	/*		{ label: '状态', name: 'status', width: 80,sortable: false, formatter: function(value, options, row){
 				return value === 0 ? 
 					'<span class="label label-danger">禁用</span>' : 
 					'<span class="label label-success">正常</span>';
 			}},
 			
-			{ label: '创建人', name: 'createUserName', width: 80,sortable: false }, 			
+			{ label: '创建人', name: 'createUserName', width: 80,sortable: false }, 		*/	
 			{ label: '创建时间', name: 'createTime', index: 'create_time', width: 80,sortable: false }			
         ],
         sortable: false,
@@ -95,7 +95,7 @@ var vm = new Vue({
 			vm.showList = true;
 			var page = $("#jqGrid").jqGrid('getGridParam','page');
 			$("#jqGrid").jqGrid('setGridParam',{
-				   postData:{'name': vm.q.name,'status':1},
+				   postData:{'name': vm.q.name},
                 page:page
             }).trigger("reloadGrid");
 		}
