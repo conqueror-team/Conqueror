@@ -33,7 +33,11 @@ $(function () {
 			}},
 			{ label: '大区名称', name: 'regionName', index: 'region_name', width: 80,sortable: false }, 			
 			{ label: '备注', name: 'remarks', index: 'remarks', width: 180,sortable: false,formatter:function(value, options, row){
-				return '<textarea class="form-control" style="width: 100%;" readonly="readonly">'+value+'</textarea>';
+				if(value){
+					return '<div style="max-height:80px;overflow-y: scroll;width:100%;word-break: break-all;white-space: normal;">'+value+'</div>';
+				}else{
+					return '';
+				}
 			} },
 			{ label: '状态', name: 'status', width: 80,sortable: false, formatter: function(value, options, row){
 				return value === 0 ? 
