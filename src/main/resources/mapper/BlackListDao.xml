@@ -27,9 +27,6 @@
 			<if test="name != null and name.trim() != ''">
 				and (bl.name like CONCAT(CONCAT('%',#{name}),'%') or bl.group_name like CONCAT(CONCAT('%',#{name}),'%'))
 			</if>
-			<if test="status != null and status.trim() != ''">
-				and bl.status=#{status}
-			</if>
 			
 		</where>
         <choose>
