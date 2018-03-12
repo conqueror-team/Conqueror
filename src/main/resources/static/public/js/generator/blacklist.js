@@ -6,7 +6,7 @@ $(function () {
 			{ label: 'id', name: 'id', index: 'id', width: 50, key: true,hidden:true },
 			{ label: '角色名称', name: 'name', index: 'name', width: 80 }, 			
 			{ label: '冒险团名称', name: 'groupName', index: 'group_name', width: 80 }, 			
-			{ label: '图片', name: 'imgUrl', width: 150, formatter: function(value, options, row){
+			{ label: '证据图片', name: 'imgUrl', width: 150, formatter: function(value, options, row){
 				if(value!=null&&value!=''){
 					var imgs=value.split(',');
 					var imgHtml='<ul class="nav navbar-nav">';
