@@ -25,6 +25,7 @@ public class Query extends LinkedHashMap<String, Object> {
         this.put("offset", (page - 1) * limit);
         this.put("page", page);
         this.put("limit", page*limit+1);
+        this.put("limit", limit);
 
         //防止SQL注入（因为sidx、order是通过拼接SQL实现排序的，会有SQL注入风险）
         String sidx = params.get("sidx").toString();

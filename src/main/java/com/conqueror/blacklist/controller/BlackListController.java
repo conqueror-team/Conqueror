@@ -16,6 +16,7 @@ import com.conqueror.blacklist.service.BlackListService;
 import com.conqueror.blacklist.utils.PageUtils;
 import com.conqueror.blacklist.utils.Query;
 import com.conqueror.blacklist.utils.R;
+import com.conqueror.blacklist.utils.annotation.SysLog;
 import com.conqueror.blacklist.utils.validator.ValidatorUtils;
 import com.conqueror.blacklist.utils.validator.group.AddGroup;
 import com.conqueror.blacklist.utils.validator.group.UpdateGroup;
@@ -66,6 +67,7 @@ public class BlackListController extends AbstractController {
 	/**
 	 * 保存
 	 */
+	@SysLog("保存黑名单")
 	@RequestMapping("/save")
 	@RequiresPermissions("blacklist:save")
 	public R save(@RequestBody BlackListEntity blackList){
@@ -80,6 +82,7 @@ public class BlackListController extends AbstractController {
 	/**
 	 * 修改
 	 */
+	@SysLog("修改黑名单")
 	@RequestMapping("/update")
 	@RequiresPermissions("blacklist:update")
 	public R update(@RequestBody BlackListEntity blackList){
@@ -92,6 +95,7 @@ public class BlackListController extends AbstractController {
 	/**
 	 * 删除
 	 */
+	@SysLog("删除黑名单")
 	@RequestMapping("/delete")
 	@RequiresPermissions("blacklist:delete")
 	public R delete(@RequestBody Integer[] ids){
