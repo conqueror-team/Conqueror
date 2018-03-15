@@ -126,7 +126,7 @@ var vm = new Vue({
 			vm.showList = false;
 			vm.title = "新增";
 			vm.blackList = {severity:1,regionName:'重庆1区',};
-			$("#imgUrl").val("")
+			$("#imgUrl").val("");
 			$("#addImgId").show();
 			$("#updateImgId").hide();
 		},
