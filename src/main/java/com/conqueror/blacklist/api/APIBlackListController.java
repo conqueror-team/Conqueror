@@ -57,6 +57,29 @@ public class APIBlackListController {
 		return R.ok().put("page", pageUtil);
 	}
 	
+	@IgnoreAuth
+	@ApiOperation(value = "只能根据角色名称查询的黑名单列表",notes = "只能根据角色名称查询的黑名单列表")
+	@GetMapping("/queryListByName")
+	public R queryListByName(
+			@ApiParam("黑名单名称") @RequestParam(required = false) String name,
+			@ApiParam("页数") @RequestParam(defaultValue = "1", required = false) Integer page,
+			@ApiParam("条数") @RequestParam(defaultValue = "10", required = false) Integer limit){
+		Map<String, Object> params=new HashMap<>();
+		params.put("name", name);
+		params.put("page", page);
+		params.put("limit", limit);
+		params.put("sidx", "");
+		params.put("order", "desc");
+		//查询列表数据
+        Query query = new Query(params);
+
+		List<BlackListEntity> blackListList = blackListService.queryList2(query);
+		int total = blackListService.queryTotal2(query);
+		
+		PageUtils pageUtil = new PageUtils(blackListList, total, query.getLimit(), query.getPage());
+		
+		return R.ok().put("page", pageUtil);
+	}
 	/**
 	 * 信息
 	 */

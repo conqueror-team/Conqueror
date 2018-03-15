@@ -53,5 +53,15 @@ public class BlackListServiceImpl implements BlackListService {
 	public void deleteBatch(Integer[] ids){
 		blackListDao.deleteBatch(ids);
 	}
+
+	@Override
+	public List<BlackListEntity> queryList2(Map<String, Object> map) {
+		return blackListDao.queryList2(map);
+	}
+
+	@Override
+	public int queryTotal2(Map<String, Object> map) {
+		return blackListDao.queryTotal2(map);
+	}
 	
 }

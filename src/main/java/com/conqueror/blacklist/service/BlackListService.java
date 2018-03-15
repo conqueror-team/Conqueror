@@ -27,4 +27,9 @@ public interface BlackListService {
 	void delete(Integer id);
 	
 	void deleteBatch(Integer[] ids);
+	
+	List<BlackListEntity> queryList2(Map<String, Object> map);
+	
+	
+	int queryTotal2(Map<String, Object> map);
 }
