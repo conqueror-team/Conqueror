@@ -252,6 +252,7 @@ var vm = new Vue({
 $("#jqGrid").on('click','img',function(){
 	$('.album').fadeIn(300);
 	$("#showImg").attr("src",$(this).attr("src"));
+//	var imgs=$(this).parent().parent().find('img');
 });
 $('.album').on('click', function (){
 	$('.album').fadeOut(300);
