@@ -5,15 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.conqueror.blacklist.service.SysRoleService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.conqueror.blacklist.dao.SysUserDao;
-import com.conqueror.blacklist.entity.SysUserEntity;
+import com.conqueror.blacklist.dao.blacklist.SysUserDao;
+import com.conqueror.blacklist.entity.blacklist.SysUserEntity;
+import com.conqueror.blacklist.service.SysRoleService;
 import com.conqueror.blacklist.service.SysUserRoleService;
 import com.conqueror.blacklist.service.SysUserService;
 import com.conqueror.blacklist.utils.Constant;

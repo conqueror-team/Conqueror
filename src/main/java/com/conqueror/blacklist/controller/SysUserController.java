@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.conqueror.blacklist.entity.SysUserEntity;
+import com.conqueror.blacklist.entity.blacklist.SysUserEntity;
 import com.conqueror.blacklist.service.SysUserRoleService;
 import com.conqueror.blacklist.service.SysUserService;
 import com.conqueror.blacklist.utils.Constant;

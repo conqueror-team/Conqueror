@@ -1,7 +1,5 @@
 package com.conqueror.blacklist.utils.resolver;
 
-import com.conqueror.blacklist.utils.annotation.LoginUser;
-import com.conqueror.blacklist.utils.interceptor.AuthorizationInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
@@ -11,8 +9,10 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-import com.conqueror.blacklist.entity.UserEntity;
+import com.conqueror.blacklist.entity.blacklist.UserEntity;
 import com.conqueror.blacklist.service.UserService;
+import com.conqueror.blacklist.utils.annotation.LoginUser;
+import com.conqueror.blacklist.utils.interceptor.AuthorizationInterceptor;
 
 /**
  * 有@LoginUser注解的方法参数，注入当前登录用户

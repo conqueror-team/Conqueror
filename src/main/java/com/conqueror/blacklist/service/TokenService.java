@@ -2,7 +2,7 @@ package com.conqueror.blacklist.service;
 
 import java.util.Map;
 
-import com.conqueror.blacklist.entity.TokenEntity;
+import com.conqueror.blacklist.entity.blacklist.TokenEntity;
 
 /**
  * 用户Token

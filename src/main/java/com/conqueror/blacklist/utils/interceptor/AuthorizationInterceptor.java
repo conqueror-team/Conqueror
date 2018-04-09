@@ -1,18 +1,18 @@
 package com.conqueror.blacklist.utils.interceptor;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.conqueror.blacklist.entity.TokenEntity;
+import com.conqueror.blacklist.entity.blacklist.TokenEntity;
 import com.conqueror.blacklist.service.TokenService;
 import com.conqueror.blacklist.utils.RRException;
 import com.conqueror.blacklist.utils.annotation.IgnoreAuth;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * 权限(Token)验证

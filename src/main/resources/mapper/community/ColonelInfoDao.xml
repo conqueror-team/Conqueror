@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.conqueror.blacklist.dao.community.ColonelInfoDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.conqueror.blacklist.entity.community.ColonelInfoEntity" id="colonelInfoMap">
+        <result property="id" column="id"/>
+        <result property="belongGroup" column="belong_group"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="groupName" column="group_name"/>
+        <result property="groupDate" column="group_date"/>
+        <result property="contactsQq" column="contacts_qq"/>
+        <result property="createUserId" column="create_user_id"/>
+        <result property="createDate" column="create_date"/>
+        <result property="lastUpdateUserId" column="last_update_user_id"/>
+        <result property="lastUpdateDate" column="last_update_date"/>
+        <result property="delflag" column="delflag"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.conqueror.blacklist.entity.community.ColonelInfoEntity">
+		select `id`, `belong_group`, `nick_name`, `group_name`, `group_date`, `create_user_id`, `create_date`, `last_update_user_id`, `last_update_date`, `delflag` from cc_colonel_info where id = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.conqueror.blacklist.entity.community.ColonelInfoEntity">
+		select `id`, `belong_group`, `nick_name`, `group_name`, `group_date`, `create_user_id`, `create_date`, `last_update_user_id`, `last_update_date`, `delflag` from cc_colonel_info 
+			<where>
+				<if test="name != null and name.trim() != ''">
+					and (belong_group like CONCAT(CONCAT('%',#{name}),'%') or nick_name like CONCAT(CONCAT('%',#{name}),'%')
+					or group_name like CONCAT(CONCAT('%',#{name}),'%') or group_date like CONCAT(CONCAT('%',#{name}),'%')
+					or contacts_qq like CONCAT(CONCAT('%',#{name}),'%')
+					)
+				</if>
+			</where>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from cc_colonel_info 
+		<where>
+				<if test="name != null and name.trim() != ''">
+					and (belong_group like CONCAT(CONCAT('%',#{name}),'%') or nick_name like CONCAT(CONCAT('%',#{name}),'%')
+					or group_name like CONCAT(CONCAT('%',#{name}),'%') or group_date like CONCAT(CONCAT('%',#{name}),'%')
+					or contacts_qq like CONCAT(CONCAT('%',#{name}),'%')
+					)
+				</if>
+			</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.conqueror.blacklist.entity.community.ColonelInfoEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into cc_colonel_info
+		(
+			`belong_group`, 
+			`nick_name`, 
+			`group_name`, 
+			`group_date`, 
+			`contacts_qq`, 
+			`create_user_id`, 
+			`create_date`, 
+			`last_update_user_id`, 
+			`last_update_date`, 
+			`delflag`
+		)
+		values
+		(
+			#{belongGroup}, 
+			#{nickName}, 
+			#{groupName}, 
+			#{groupDate}, 
+			#{contactsQq}, 
+			#{createUserId}, 
+			#{createDate}, 
+			#{lastUpdateUserId}, 
+			#{lastUpdateDate}, 
+			#{delflag}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.conqueror.blacklist.entity.community.ColonelInfoEntity">
+		update cc_colonel_info 
+		<set>
+			<if test="belongGroup != null">`belong_group` = #{belongGroup}, </if>
+			<if test="nickName != null">`nick_name` = #{nickName}, </if>
+			<if test="groupName != null">`group_name` = #{groupName}, </if>
+			<if test="groupDate != null">`group_date` = #{groupDate}, </if>
+			<if test="contactsQq != null">`contacts_qq` = #{contactsQq}, </if>
+			<if test="createUserId != null">`create_user_id` = #{createUserId}, </if>
+			<if test="createDate != null">`create_date` = #{createDate}, </if>
+			<if test="lastUpdateUserId != null">`last_update_user_id` = #{lastUpdateUserId}, </if>
+			<if test="lastUpdateDate != null">`last_update_date` = #{lastUpdateDate}, </if>
+			<if test="delflag != null">`delflag` = #{delflag}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		update cc_colonel_info set delflag=1 where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		update cc_colonel_info set delflag=1 where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

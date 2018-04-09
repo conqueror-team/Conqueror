@@ -1,9 +1,10 @@
 package com.conqueror.blacklist.utils;
 
-import com.conqueror.blacklist.entity.SysUserEntity;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+
+import com.conqueror.blacklist.entity.blacklist.SysUserEntity;
 
 /**
  * Shiro工具类

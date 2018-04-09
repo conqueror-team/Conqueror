@@ -7,7 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.conqueror.blacklist.dao.SysUserRoleDao;
+import com.conqueror.blacklist.dao.blacklist.SysUserRoleDao;
 import com.conqueror.blacklist.service.SysUserRoleService;
 
 

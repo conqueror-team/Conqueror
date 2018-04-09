@@ -1,9 +1,9 @@
 package com.conqueror.blacklist.service;
 
-import com.conqueror.blacklist.entity.BlackListEntity;
-
 import java.util.List;
 import java.util.Map;
+
+import com.conqueror.blacklist.entity.blacklist.BlackListEntity;
 
 /**
  * 黑名单

@@ -1,6 +1,18 @@
 package com.conqueror.blacklist.controller;
 
-import com.conqueror.blacklist.entity.SysRoleEntity;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.conqueror.blacklist.entity.blacklist.SysRoleEntity;
 import com.conqueror.blacklist.service.SysRoleMenuService;
 import com.conqueror.blacklist.service.SysRoleService;
 import com.conqueror.blacklist.utils.Constant;
@@ -9,13 +21,6 @@ import com.conqueror.blacklist.utils.Query;
 import com.conqueror.blacklist.utils.R;
 import com.conqueror.blacklist.utils.annotation.SysLog;
 import com.conqueror.blacklist.utils.validator.ValidatorUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 角色管理

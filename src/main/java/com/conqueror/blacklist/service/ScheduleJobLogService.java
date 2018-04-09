@@ -3,7 +3,7 @@ package com.conqueror.blacklist.service;
 import java.util.List;
 import java.util.Map;
 
-import com.conqueror.blacklist.entity.ScheduleJobLogEntity;
+import com.conqueror.blacklist.entity.blacklist.ScheduleJobLogEntity;
 
 /**
  * 定时任务日志

@@ -3,7 +3,7 @@ package com.conqueror.blacklist.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.conqueror.blacklist.entity.SysUserEntity;
+import com.conqueror.blacklist.entity.blacklist.SysUserEntity;
 import com.conqueror.blacklist.utils.ShiroUtils;
 
 /**

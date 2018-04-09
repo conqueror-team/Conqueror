@@ -1,6 +1,8 @@
 package com.conqueror.blacklist.controller;
 
-import com.conqueror.blacklist.utils.PageUtils;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,13 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.conqueror.blacklist.entity.ScheduleJobLogEntity;
+import com.conqueror.blacklist.entity.blacklist.ScheduleJobLogEntity;
 import com.conqueror.blacklist.service.ScheduleJobLogService;
+import com.conqueror.blacklist.utils.PageUtils;
 import com.conqueror.blacklist.utils.Query;
 import com.conqueror.blacklist.utils.R;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * 定时任务日志

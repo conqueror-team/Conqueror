@@ -1,19 +1,23 @@
 package com.conqueror.blacklist.controller;
 
-import com.conqueror.blacklist.entity.SysConfigEntity;
-import com.conqueror.blacklist.utils.PageUtils;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.conqueror.blacklist.entity.blacklist.SysConfigEntity;
 import com.conqueror.blacklist.service.SysConfigService;
+import com.conqueror.blacklist.utils.PageUtils;
 import com.conqueror.blacklist.utils.Query;
 import com.conqueror.blacklist.utils.R;
 import com.conqueror.blacklist.utils.annotation.SysLog;
 import com.conqueror.blacklist.utils.validator.ValidatorUtils;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * 系统配置信息

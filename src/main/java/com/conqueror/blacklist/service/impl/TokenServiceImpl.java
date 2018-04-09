@@ -1,16 +1,16 @@
 package com.conqueror.blacklist.service.impl;
 
-import com.conqueror.blacklist.dao.TokenDao;
-import com.conqueror.blacklist.service.TokenService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.conqueror.blacklist.entity.TokenEntity;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.conqueror.blacklist.dao.blacklist.TokenDao;
+import com.conqueror.blacklist.entity.blacklist.TokenEntity;
+import com.conqueror.blacklist.service.TokenService;
 
 
 @Service("tokenService")

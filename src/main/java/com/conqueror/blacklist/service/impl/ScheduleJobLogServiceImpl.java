@@ -6,8 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.conqueror.blacklist.dao.ScheduleJobLogDao;
-import com.conqueror.blacklist.entity.ScheduleJobLogEntity;
+import com.conqueror.blacklist.dao.blacklist.ScheduleJobLogDao;
+import com.conqueror.blacklist.entity.blacklist.ScheduleJobLogEntity;
 import com.conqueror.blacklist.service.ScheduleJobLogService;
 
 @Service("scheduleJobLogService")

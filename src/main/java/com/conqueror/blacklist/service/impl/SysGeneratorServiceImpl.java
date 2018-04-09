@@ -1,17 +1,17 @@
 package com.conqueror.blacklist.service.impl;
 
-import com.conqueror.blacklist.dao.SysGeneratorDao;
-import org.apache.commons.io.IOUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.conqueror.blacklist.service.SysGeneratorService;
-import com.conqueror.blacklist.utils.GenUtils;
-
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipOutputStream;
+
+import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.conqueror.blacklist.dao.blacklist.SysGeneratorDao;
+import com.conqueror.blacklist.service.SysGeneratorService;
+import com.conqueror.blacklist.utils.GenUtils;
 
 @Service("sysGeneratorService")
 public class SysGeneratorServiceImpl implements SysGeneratorService {

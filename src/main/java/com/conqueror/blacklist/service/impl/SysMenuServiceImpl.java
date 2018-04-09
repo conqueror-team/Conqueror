@@ -13,8 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.conqueror.blacklist.dao.SysMenuDao;
-import com.conqueror.blacklist.entity.SysMenuEntity;
+import com.conqueror.blacklist.dao.blacklist.SysMenuDao;
+import com.conqueror.blacklist.entity.blacklist.SysMenuEntity;
 import com.conqueror.blacklist.service.SysMenuService;
 import com.conqueror.blacklist.service.SysRoleMenuService;
 import com.conqueror.blacklist.service.SysUserService;

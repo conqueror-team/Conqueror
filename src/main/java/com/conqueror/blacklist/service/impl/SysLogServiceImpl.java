@@ -1,13 +1,14 @@
 package com.conqueror.blacklist.service.impl;
 
-import com.conqueror.blacklist.dao.SysLogDao;
-import com.conqueror.blacklist.entity.SysLogEntity;
-import com.conqueror.blacklist.service.SysLogService;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
+import com.conqueror.blacklist.dao.blacklist.SysLogDao;
+import com.conqueror.blacklist.entity.blacklist.SysLogEntity;
+import com.conqueror.blacklist.service.SysLogService;
 
 
 

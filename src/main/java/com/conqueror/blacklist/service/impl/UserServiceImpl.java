@@ -1,18 +1,18 @@
 package com.conqueror.blacklist.service.impl;
 
-import com.conqueror.blacklist.dao.UserDao;
-import com.conqueror.blacklist.utils.RRException;
-import com.conqueror.blacklist.utils.validator.Assert;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.conqueror.blacklist.entity.UserEntity;
+import com.conqueror.blacklist.dao.blacklist.UserDao;
+import com.conqueror.blacklist.entity.blacklist.UserEntity;
 import com.conqueror.blacklist.service.UserService;
-
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import com.conqueror.blacklist.utils.RRException;
+import com.conqueror.blacklist.utils.validator.Assert;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {

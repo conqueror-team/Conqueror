@@ -1,14 +1,14 @@
 package com.conqueror.blacklist.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import com.conqueror.blacklist.dao.BlackListDao;
-import com.conqueror.blacklist.entity.BlackListEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.conqueror.blacklist.dao.blacklist.BlackListDao;
+import com.conqueror.blacklist.entity.blacklist.BlackListEntity;
 import com.conqueror.blacklist.service.BlackListService;
 
 
@@ -17,7 +17,6 @@ import com.conqueror.blacklist.service.BlackListService;
 public class BlackListServiceImpl implements BlackListService {
 	@Autowired
 	private BlackListDao blackListDao;
-	
 	@Override
 	public BlackListEntity queryObject(Integer id){
 		return blackListDao.queryObject(id);

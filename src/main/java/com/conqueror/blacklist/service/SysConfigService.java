@@ -3,7 +3,7 @@ package com.conqueror.blacklist.service;
 import java.util.List;
 import java.util.Map;
 
-import com.conqueror.blacklist.entity.SysConfigEntity;
+import com.conqueror.blacklist.entity.blacklist.SysConfigEntity;
 
 /**
  * 系统配置信息

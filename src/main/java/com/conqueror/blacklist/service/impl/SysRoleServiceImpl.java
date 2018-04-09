@@ -4,18 +4,18 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import com.conqueror.blacklist.dao.SysRoleDao;
-import com.conqueror.blacklist.service.SysRoleMenuService;
-import com.conqueror.blacklist.service.SysRoleService;
-import com.conqueror.blacklist.service.SysUserService;
-import com.conqueror.blacklist.utils.RRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.conqueror.blacklist.entity.SysRoleEntity;
+import com.conqueror.blacklist.dao.blacklist.SysRoleDao;
+import com.conqueror.blacklist.entity.blacklist.SysRoleEntity;
+import com.conqueror.blacklist.service.SysRoleMenuService;
+import com.conqueror.blacklist.service.SysRoleService;
 import com.conqueror.blacklist.service.SysUserRoleService;
+import com.conqueror.blacklist.service.SysUserService;
 import com.conqueror.blacklist.utils.Constant;
+import com.conqueror.blacklist.utils.RRException;
 
 
 /**

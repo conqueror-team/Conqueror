@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.conqueror.blacklist.entity.BlackListEntity;
+import com.conqueror.blacklist.entity.blacklist.BlackListEntity;
 import com.conqueror.blacklist.service.BlackListService;
 import com.conqueror.blacklist.utils.PageUtils;
 import com.conqueror.blacklist.utils.Query;
