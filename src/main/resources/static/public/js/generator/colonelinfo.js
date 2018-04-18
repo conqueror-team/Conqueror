@@ -8,7 +8,7 @@ $(function () {
 			{ label: '开团名称', name: 'nickName', index: 'nick_name', width: 80 }, 			
 			{ label: '冒险团名称', name: 'groupName', index: 'group_name', width: 80 }, 			
 			{ label: '冒险团日期', name: 'groupDate', index: 'group_date', width: 80 }, 			
-//			{ label: 'QQ号', name: 'contactsQq', index: 'contacts_qq', width: 80 }, 			
+			{ label: 'QQ号', name: 'contactsQq', index: 'contacts_qq', width: 80 }, 			
 			{ label: '创建人', name: 'createUserId', index: 'create_user_id', width: 80 }, 			
 			{ label: '创建时间', name: 'createDate', index: 'create_date', width: 80 }, 			
 			{ label: '最后修改人', name: 'lastUpdateUserId', index: 'last_update_user_id', width: 80 }, 			

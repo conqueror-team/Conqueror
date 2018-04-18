@@ -1,4 +1,4 @@
-/*package com.conqueror.blacklist;
+package com.conqueror.blacklist;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -17,4 +17,3 @@ public class BootApplication{
 	}
 	
 }
-*/
