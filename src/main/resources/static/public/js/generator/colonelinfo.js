@@ -13,7 +13,7 @@ $(function () {
 			{ label: '创建时间', name: 'createDate', index: 'create_date', width: 80 }, 			
 			{ label: '最后修改人', name: 'lastUpdateUserId', index: 'last_update_user_id', width: 80 }, 			
 			{ label: '最后修改时间', name: 'lastUpdateDate', index: 'last_update_date', width: 80 }, 			
-			{ label: '是否删除 ', name: 'delflag', index: 'delflag', width: 80,formatter: function(value, options, row){
+			{ label: '是否开除', name: 'delflag', index: 'delflag', width: 80,formatter: function(value, options, row){
 				if(value===0){
 					return'<span class="label label-success">正常</span>';
 				}else{
