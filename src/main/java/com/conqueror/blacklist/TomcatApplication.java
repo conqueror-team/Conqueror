@@ -8,7 +8,7 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
- * 
+ *
     * @ClassName: TomcatApplication
     * @Description: tomcat启动添加类
     * @author Sven

@@ -51,5 +51,10 @@ public class ColonelInfoServiceImpl implements ColonelInfoService {
 	public void deleteBatch(Integer[] ids){
 		colonelInfoDao.deleteBatch(ids);
 	}
-	
+
+	@Override
+	public List<ColonelInfoEntity> queryList2(Map<String, Object> map) {
+		return colonelInfoDao.queryList2(map);
+	}
+
 }

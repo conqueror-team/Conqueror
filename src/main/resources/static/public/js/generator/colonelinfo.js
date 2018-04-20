@@ -17,7 +17,7 @@ $(function () {
 				if(value===0){
 					return'<span class="label label-success">正常</span>';
 				}else{
-					return'<span class="label label-danger">删除</span>';
+					return'<span class="label label-danger">开除</span>';
 				}
 			}}			
         ],
@@ -47,7 +47,7 @@ $(function () {
         }
     });
 });
-
+var i=1;
 var vm = new Vue({
 	el:'#rrapp',
 	data:{
@@ -57,7 +57,8 @@ var vm = new Vue({
 		},
 		showList: true,
 		title: null,
-		colonelInfo: {}
+		colonelInfo: {},
+		groups:[]
 	},
 	methods: {
 		query: function () {
@@ -67,6 +68,7 @@ var vm = new Vue({
 			vm.showList = false;
 			vm.title = "新增";
 			vm.colonelInfo = {};
+			vm.groups=[];
 		},
 		update: function (event) {
 			var id = getSelectedRow();
@@ -75,11 +77,25 @@ var vm = new Vue({
 			}
 			vm.showList = false;
             vm.title = "修改";
-            
+            vm.groups=[];
             vm.getInfo(id)
 		},
 		saveOrUpdate: function (event) {
 			var url = vm.colonelInfo.id == null ? "../colonelinfo/save" : "../colonelinfo/update";
+			var groupNames=$(".groupName");
+            var groupDates=$(".groupDate");
+            vm.colonelInfo.groupName="";
+            vm.colonelInfo.groupDate="";
+            for(var k=0;k<groupNames.length;k++){
+            	if(groupNames[k].value!=""&&groupDates[k].value!=""){
+                	vm.colonelInfo.groupName+=groupNames[k].value+"|";
+                    vm.colonelInfo.groupDate+=groupDates[k].value+"|";
+                }
+			}
+            if(vm.colonelInfo.groupDate.substr(vm.colonelInfo.groupDate.length-1, 1)=="|"){
+                vm.colonelInfo.groupDate=vm.colonelInfo.groupDate.substr(0, vm.colonelInfo.groupDate.length-1);
+                vm.colonelInfo.groupName=vm.colonelInfo.groupName.substr(0, vm.colonelInfo.groupName.length-1);
+			}
 			$.ajax({
 				type: "POST",
 			    url: url,
@@ -121,15 +137,38 @@ var vm = new Vue({
 		getInfo: function(id){
 			$.get("../colonelinfo/info/"+id, function(r){
                 vm.colonelInfo = r.colonelInfo;
+                var groupName = r.colonelInfo.groupName.split("|");
+				var groupDate = r.colonelInfo.groupDate.split("|");
+				for(var j=0;j<groupName.length;j++){
+					$("#indexGroup").hide();
+                    vm.groups.push({
+                        groupName:groupName[j],
+                        groupDate:groupDate[j]
+					});
+				}
             });
 		},
 		reload: function (event) {
 			vm.showList = true;
+            i=1;
+            $("#indexGroup").show();
+            var groupNames=$(".groupName");
+            for(var k1=1;k1<=groupNames.length;k1++){
+                $("#addGroupDiv_"+k1).remove();
+                $("#addGroupDiv_show"+k1).remove();
+            }
 			var page = $("#jqGrid").jqGrid('getGridParam','page');
 			$("#jqGrid").jqGrid('setGridParam',{ 
 				 postData:{'name': vm.q.name},
                 page:page
             }).trigger("reloadGrid");
+		},
+        addGroup: function(){//新增
+			$("#addGroupDiv").clone(true).attr('id','addGroupDiv_'+i++).appendTo("#addGroup").show();
 		}
 	}
 });
+
+ function delGroup(event){//删除
+     event.parentElement.remove()
+}

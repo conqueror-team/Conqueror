@@ -71,7 +71,8 @@ public class ShiroConfig {
         //黑名单查询
         filterMap.put("/blacklist/list", "anon");
         filterMap.put("/generator/searchBlacklist.html", "anon");
-        
+        filterMap.put("/colonelinfo/searchList", "anon");
+        filterMap.put("/generator/searchColonelinfo.html", "anon");
         filterMap.put("/**", "authc");
         shiroFilter.setFilterChainDefinitionMap(filterMap);
 

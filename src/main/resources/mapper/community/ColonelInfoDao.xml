@@ -44,7 +44,30 @@
 			limit #{offset}, #{limit}
 		</if>
 	</select>
-	
+
+	<select id="queryList2" resultType="com.conqueror.blacklist.entity.community.ColonelInfoEntity">
+		select `id`, `belong_group`, `nick_name`, `group_name`, `group_date`, `create_user_id`, `create_date`, `last_update_user_id`, `last_update_date`, `delflag` from cc_colonel_info
+		<where>
+			<if test="name != null and name.trim() != ''">
+				and (belong_group like CONCAT(CONCAT('%',#{name}),'%') or nick_name like CONCAT(CONCAT('%',#{name}),'%')
+				or group_name like CONCAT(CONCAT('%',#{name}),'%') or group_date like CONCAT(CONCAT('%',#{name}),'%')
+				or contacts_qq like CONCAT(CONCAT('%',#{name}),'%')
+				)
+			</if>
+		</where>
+		<choose>
+			<when test="sidx != null and sidx.trim() != ''">
+				order by ${sidx} ${order}
+			</when>
+			<otherwise>
+				order by id desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
  	<select id="queryTotal" resultType="int">
 		select count(*) from cc_colonel_info 
 		<where>

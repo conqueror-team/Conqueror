@@ -1,5 +1,9 @@
 package com.conqueror.blacklist.entity.community;
 
+import com.conqueror.blacklist.utils.validator.group.AddGroup;
+import com.conqueror.blacklist.utils.validator.group.UpdateGroup;
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -18,14 +22,19 @@ public class ColonelInfoEntity implements Serializable {
 	//
 	private Integer id;
 	//所属小组T1-TN
+	@NotBlank(message="所属小组T1-TN不能为空", groups = {AddGroup.class, UpdateGroup.class})
 	private String belongGroup;
 	//开团名称
+	@NotBlank(message="开团名称不能为空", groups = {AddGroup.class, UpdateGroup.class})
 	private String nickName;
 	//冒险团名称
+	@NotBlank(message="冒险团名称不能为空", groups = {AddGroup.class, UpdateGroup.class})
 	private String groupName;
 	//冒险团日期
+	@NotBlank(message="冒险团日期不能为空", groups = {AddGroup.class, UpdateGroup.class})
 	private String groupDate;
 	//QQ号
+	@NotBlank(message="QQ号不能为空", groups = {AddGroup.class, UpdateGroup.class})
 	private String contactsQq;
 	//创建人
 	private String createUserId;

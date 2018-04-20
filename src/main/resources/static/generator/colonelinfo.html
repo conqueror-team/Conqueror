@@ -50,17 +50,42 @@
 			      <input type="text" class="form-control" v-model="colonelInfo.nickName" placeholder="开团名称"/>
 			    </div>
 			</div>
-			<div class="form-group">
-			   	<div class="col-sm-2 control-label">冒险团名称</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="colonelInfo.groupName" placeholder="冒险团名称"/>
-			    </div>
+			<div class="form-group" id="indexGroup">
+			   	<div class="col-sm-2 control-label">冒险团</div>
+			   	<div class="col-sm-3" style="padding-left: 0px;">
+			      <input type="text" class="form-control groupName" placeholder="冒险团名称"/>
+				</div>
+				<div class="col-sm-3"style="padding-left: 0px;">
+					<input type="text" class="form-control groupDate" placeholder="冒险团日期"/>
+				</div>
+				<input type="button" class="btn btn-info" @click="addGroup" value="增加"/>
 			</div>
-			<div class="form-group">
-			   	<div class="col-sm-2 control-label">冒险团日期</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="colonelInfo.groupDate" placeholder="冒险团日期"/>
-			    </div>
+
+			<div id="showGroup">
+				<div class="form-group" v-for="(group,index) in groups" :id="'addGroupDiv_show'+index">
+					<div class="col-sm-2 control-label" v-if="index==0">冒险团</div>
+					<div class="col-sm-2 control-label" v-else></div>
+					<div class="col-sm-3" style="padding-left: 0px;">
+						<input type="text" class="form-control groupName" v-bind:value="group.groupName" placeholder="冒险团名称"/>
+					</div>
+					<div class="col-sm-3"style="padding-left: 0px;">
+						<input type="text" class="form-control groupDate" v-bind:value="group.groupDate" placeholder="冒险团日期"/>
+					</div>
+					<input type="button" class="btn btn-info" @click="addGroup" value="增加" v-if="index==0"/>
+					<input type="button" class="btn btn-info" onclick="delGroup(this)" value="删除" v-else/>
+				</div>
+			</div>
+			<div id="addGroup">
+				<div class="form-group" style="display: none" id="addGroupDiv">
+					<div class="col-sm-2 control-label"></div>
+					<div class="col-sm-3" style="padding-left: 0px;">
+						<input type="text" class="form-control groupName" placeholder="冒险团名称"/>
+					</div>
+					<div class="col-sm-3"style="padding-left: 0px;">
+						<input type="text" class="form-control groupDate" placeholder="冒险团日期"/>
+					</div>
+					<input type="button" class="btn btn-info" onclick="delGroup(this)" value="删除"/>
+				</div>
 			</div>
 			<div class="form-group">
 			   	<div class="col-sm-2 control-label">QQ号</div>

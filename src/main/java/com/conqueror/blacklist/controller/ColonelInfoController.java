@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.conqueror.blacklist.utils.validator.ValidatorUtils;
+import com.conqueror.blacklist.utils.validator.group.AddGroup;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,16 +42,33 @@ public class ColonelInfoController extends AbstractController{
 	@RequiresPermissions("colonelinfo:list")
 	public R list(@RequestParam Map<String, Object> params){
 		//查询列表数据
-        Query query = new Query(params);
+		Query query = new Query(params);
 
 		List<ColonelInfoEntity> colonelInfoList = colonelInfoService.queryList(query);
 		int total = colonelInfoService.queryTotal(query);
-		
+
 		PageUtils pageUtil = new PageUtils(colonelInfoList, total, query.getLimit(), query.getPage());
-		
+
 		return R.ok().put("page", pageUtil);
 	}
-	
+
+	/**
+	 * 不需要登录查询
+	 * @param params
+	 * @return
+	 */
+	@RequestMapping("/searchList")
+	public R searchList(@RequestParam Map<String, Object> params){
+		//查询列表数据
+		Query query = new Query(params);
+
+		List<ColonelInfoEntity> colonelInfoList = colonelInfoService.queryList2(query);
+		int total = colonelInfoService.queryTotal(query);
+
+		PageUtils pageUtil = new PageUtils(colonelInfoList, total, query.getLimit(), query.getPage());
+
+		return R.ok().put("page", pageUtil);
+	}
 	
 	/**
 	 * 信息
@@ -69,6 +88,7 @@ public class ColonelInfoController extends AbstractController{
 	@RequestMapping("/save")
 	@RequiresPermissions("colonelinfo:save")
 	public R save(@RequestBody ColonelInfoEntity colonelInfo){
+		ValidatorUtils.validateEntity(colonelInfo, AddGroup.class);
 		colonelInfo.setCreateUserId(getUser().getUsername());
 		colonelInfo.setCreateDate(new Date());
 		colonelInfoService.save(colonelInfo);
@@ -83,6 +103,7 @@ public class ColonelInfoController extends AbstractController{
 	@RequestMapping("/update")
 	@RequiresPermissions("colonelinfo:update")
 	public R update(@RequestBody ColonelInfoEntity colonelInfo){
+		ValidatorUtils.validateEntity(colonelInfo, AddGroup.class);
 		colonelInfo.setLastUpdateUserId(getUser().getUsername());
 		colonelInfo.setLastUpdateDate(new Date());
 		colonelInfoService.update(colonelInfo);

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.conqueror.blacklist.entity.community.ColonelInfoEntity;
+import com.conqueror.blacklist.utils.Query;
 
 /**
  * 团长信息
@@ -27,4 +28,6 @@ public interface ColonelInfoService {
 	void delete(Integer id);
 	
 	void deleteBatch(Integer[] ids);
+
+    List<ColonelInfoEntity> queryList2(Map<String, Object> map);
 }
