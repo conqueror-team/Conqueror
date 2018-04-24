@@ -76,7 +76,7 @@ var vm = new Vue({
 			
 			vm.showList = false;
             vm.title = "修改";
-			
+            $("#userPassword").hide();
 			vm.getUser(userId);
 			//获取角色信息
 			this.getRoleList();
@@ -124,6 +124,7 @@ var vm = new Vue({
 		getUser: function(userId){
 			$.get("../sys/user/info/"+userId, function(r){
 				vm.user = r.user;
+                vm.user.password='';
 			});
 		},
 		getRoleList: function(){
@@ -133,6 +134,7 @@ var vm = new Vue({
 		},
 		reload: function (event) {
 			vm.showList = true;
+			$("#userPassword").show();
 			var page = $("#jqGrid").jqGrid('getGridParam','page');
 			$("#jqGrid").jqGrid('setGridParam',{ 
                 postData:{'username': vm.q.username},
