@@ -110,7 +110,15 @@ public class SysUserServiceImpl implements SysUserService {
 		map.put("newPassword", newPassword);
 		return sysUserDao.updatePassword(map);
 	}
-	
+
+	@Override
+	public int resetPassword(Long userId, String newPassword) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("userId", userId);
+		map.put("newPassword", newPassword);
+		return sysUserDao.resetPassword(map);
+	}
+
 	/**
 	 * 检查角色是否越权
 	 */

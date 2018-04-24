@@ -127,6 +127,28 @@ var vm = new Vue({
                 vm.user.password='';
 			});
 		},
+        resetPassword: function(){
+            var userId = getSelectedRow();
+            if(userId == null){
+                return ;
+            }
+            confirm('确定要重置选中的记录？', function() {
+                $.ajax({
+                    type: "POST",
+                    url: "../sys/user/resetPassword",
+                    data: JSON.stringify(userId),
+                    success: function (r) {
+                        if (r.code === 0) {
+                            alert('操作成功', function (index) {
+                                vm.reload();
+                            });
+                        } else {
+                            alert(r.msg);
+                        }
+                    }
+                });
+            });
+		},
 		getRoleList: function(){
 			$.get("../sys/role/select", function(r){
 				vm.roleList = r.list;

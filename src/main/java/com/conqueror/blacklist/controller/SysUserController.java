@@ -156,4 +156,19 @@ public class SysUserController extends AbstractController {
 		
 		return R.ok();
 	}
+	/**
+	 * 重置用户密码
+	 */
+	@SysLog("重置用户密码")
+	@RequestMapping("/resetPassword")
+	@RequiresPermissions("sys:user:resetPassword")
+	public R resetPassword(@RequestBody Long userId){
+		SysUserEntity user = sysUserService.queryObject(userId);
+		//更新密码
+		int count = sysUserService.resetPassword(user.getUserId(), new Sha256Hash(user.getUsername()).toHex());
+		if(count == 0){
+			return R.error("失败");
+		}
+		return R.ok();
+	}
 }

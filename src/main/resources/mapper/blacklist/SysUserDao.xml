@@ -116,4 +116,8 @@
 		</foreach>
 	</delete>
 
+	<update id="resetPassword" parameterType="map">
+		update sys_user set password = #{newPassword}
+		where user_id = #{userId}
+	</update>
 </mapper>
