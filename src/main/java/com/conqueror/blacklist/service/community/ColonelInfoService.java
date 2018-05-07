@@ -30,4 +30,6 @@ public interface ColonelInfoService {
 	void deleteBatch(Integer[] ids);
 
     List<ColonelInfoEntity> queryList2(Map<String, Object> map);
+
+    void expelBatch(Integer[] ids,String name);
 }

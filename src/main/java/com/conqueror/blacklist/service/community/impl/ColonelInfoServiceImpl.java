@@ -1,5 +1,6 @@
 package com.conqueror.blacklist.service.community.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -55,6 +56,14 @@ public class ColonelInfoServiceImpl implements ColonelInfoService {
 	@Override
 	public List<ColonelInfoEntity> queryList2(Map<String, Object> map) {
 		return colonelInfoDao.queryList2(map);
+	}
+
+	@Override
+	public void expelBatch(Integer[] ids,String name) {
+		Map<String, Object> map=new HashMap<>();
+		map.put("ids",ids);
+		map.put("name",name);
+		colonelInfoDao.expelBatch(map);
 	}
 
 }

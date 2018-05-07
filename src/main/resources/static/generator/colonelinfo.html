@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>团长信息</title>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-<link rel="stylesheet" href="../public/css/bootstrap.min.css">
-<link rel="stylesheet" href="../public/css/font-awesome.min.css">
-<link rel="stylesheet" href="../public/plugins/jqgrid/ui.jqgrid-bootstrap.css">
-<link rel="stylesheet" href="../public/plugins/ztree/css/metroStyle/metroStyle.css">
-<link rel="stylesheet" href="../public/css/main.css">
-<script src="../public/libs/jquery.min.js"></script>
-<script src="../public/plugins/layer/layer.js"></script>
-<script src="../public/libs/bootstrap.min.js"></script>
-<script src="../public/libs/vue.min.js"></script>
-<script src="../public/plugins/jqgrid/grid.locale-cn.js"></script>
-<script src="../public/plugins/jqgrid/jquery.jqGrid.min.js"></script>
-<script src="../public/plugins/ztree/jquery.ztree.all.min.js"></script>
-<script src="../public/js/common.js"></script>
+	<title>DNF征服者-团长信息查询</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<meta name="keywords" content="DNF,征服者,黑名单,团长信息查询,团长查询,团长,DNF征服者,征服者攻坚团,跨3B">
+	<meta name="description" content="征服者团长信息查询系统是提供给广大打团者一个辨别真假团的一个渠道之一,这里可以通过查看团长的冒险团名称,或者开团名称查询团长的信息，辨别真伪。">
+	<link rel="stylesheet" href="../public/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../public/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../public/plugins/jqgrid/ui.jqgrid-bootstrap.css">
+	<link rel="stylesheet" href="../public/plugins/ztree/css/metroStyle/metroStyle.css">
+	<link rel="stylesheet" href="../public/css/main.css">
+	<script src="../public/libs/jquery.min.js"></script>
+	<script src="../public/plugins/layer/layer.js"></script>
+	<script src="../public/libs/bootstrap.min.js"></script>
+	<script src="../public/libs/vue.min.js"></script>
+	<script src="../public/plugins/jqgrid/grid.locale-cn.js"></script>
+	<script src="../public/plugins/jqgrid/jquery.jqGrid.min.js"></script>
+	<script src="../public/plugins/ztree/jquery.ztree.all.min.js"></script>
+	<script src="../public/js/common.js"></script>
 </head>
 <body>
 <div id="rrapp" v-cloak>
@@ -29,6 +31,7 @@
 			<a class="btn btn-default" @click="query">查询</a>
 			<a v-if="hasPermission('colonelinfo:save')" class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
 			<a v-if="hasPermission('colonelinfo:update')" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+			<a v-if="hasPermission('colonelinfo:expel')" class="btn btn-primary" @click="expel"><i class="fa fa-trash-o"></i>&nbsp;开除</a>
 			<a v-if="hasPermission('colonelinfo:delete')" class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
 		</div>
 	    <table id="jqGrid"></table>

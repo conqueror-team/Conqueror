@@ -122,5 +122,16 @@ public class ColonelInfoController extends AbstractController{
 		
 		return R.ok();
 	}
-	
+	/**
+	 * 开除
+	 */
+	@SysLog("团长开除")
+	@RequestMapping("/expel")
+	@RequiresPermissions("colonelinfo:expel")
+	public R expel(@RequestBody Integer[] ids){
+		String name=getUser().getUsername();
+		colonelInfoService.expelBatch(ids,name);
+
+		return R.ok();
+	}
 }

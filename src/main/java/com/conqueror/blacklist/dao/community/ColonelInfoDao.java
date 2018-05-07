@@ -16,4 +16,6 @@ import java.util.Map;
 public interface ColonelInfoDao extends BaseDao<ColonelInfoEntity> {
 
     List<ColonelInfoEntity> queryList2(Map<String, Object> map);
+
+    void expelBatch(Map<String, Object> map);
 }

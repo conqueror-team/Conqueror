@@ -129,10 +129,16 @@
 	</delete>
 	
 	<delete id="deleteBatch">
-		update cc_colonel_info set delflag=1 where id in 
+		delete from cc_colonel_info where id in
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>
 	</delete>
 
+	<delete id="expelBatch">
+		update cc_colonel_info set delflag=1,last_update_user_id=#{name},last_update_date=now() where id in
+		<foreach item="id" collection="ids" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
 </mapper>

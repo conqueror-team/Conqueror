@@ -134,6 +134,29 @@ var vm = new Vue({
 				});
 			});
 		},
+        expel: function (event) {
+            var ids = getSelectedRows();
+            if(ids == null){
+                return ;
+            }
+
+            confirm('确定要开除选中的记录？', function(){
+                $.ajax({
+                    type: "POST",
+                    url: "../colonelinfo/expel",
+                    data: JSON.stringify(ids),
+                    success: function(r){
+                        if(r.code == 0){
+                            alert('操作成功', function(index){
+                                $("#jqGrid").trigger("reloadGrid");
+                            });
+                        }else{
+                            alert(r.msg);
+                        }
+                    }
+                });
+            });
+        },
 		getInfo: function(id){
 			$.get("../colonelinfo/info/"+id, function(r){
                 vm.colonelInfo = r.colonelInfo;
