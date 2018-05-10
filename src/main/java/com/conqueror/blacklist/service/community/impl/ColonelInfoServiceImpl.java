@@ -66,4 +66,20 @@ public class ColonelInfoServiceImpl implements ColonelInfoService {
 		colonelInfoDao.expelBatch(map);
 	}
 
+	@Override
+	public void warningBatch(Integer[] ids, String name) {
+		Map<String, Object> map=new HashMap<>();
+		map.put("ids",ids);
+		map.put("name",name);
+		colonelInfoDao.warningBatch(map);
+	}
+
+	@Override
+	public void cancelWarningBatch(Integer[] ids, String name) {
+		Map<String, Object> map=new HashMap<>();
+		map.put("ids",ids);
+		map.put("name",name);
+		colonelInfoDao.cancelWarningBatch(map);
+	}
+
 }

@@ -31,8 +31,10 @@
 			<a class="btn btn-default" @click="query">查询</a>
 			<a v-if="hasPermission('colonelinfo:save')" class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
 			<a v-if="hasPermission('colonelinfo:update')" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
-			<a v-if="hasPermission('colonelinfo:expel')" class="btn btn-primary" @click="expel"><i class="fa fa-trash-o"></i>&nbsp;开除</a>
-			<a v-if="hasPermission('colonelinfo:delete')" class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+			<a v-if="hasPermission('colonelinfo:cancelWarning')" class="btn btn-success" @click="cancelWarning"><i class="fa fa-exclamation-triangle"></i>&nbsp;取消警告</a>
+			<a v-if="hasPermission('colonelinfo:warning')" class="btn btn-warning" @click="warning"><i class="fa fa-exclamation-triangle"></i>&nbsp;警告</a>
+			<a v-if="hasPermission('colonelinfo:expel')" class="btn btn-danger" @click="expel"><i class="fa fa-ban"></i>&nbsp;开除</a>
+			<a v-if="hasPermission('colonelinfo:delete')" class="btn btn-danger" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
 		</div>
 	    <table id="jqGrid"></table>
 	    <div id="jqGridPager"></div>

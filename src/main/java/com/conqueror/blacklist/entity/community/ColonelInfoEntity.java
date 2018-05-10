@@ -44,7 +44,7 @@ public class ColonelInfoEntity implements Serializable {
 	private String lastUpdateUserId;
 	//最后修改时间
 	private Date lastUpdateDate;
-	//删除标识:0：未删，1已删 
+	//删除标识:0：正常，1:开除,2:脱坑,3:警告4:严重警告
 	private Integer delflag;
 
 	/**

@@ -1,4 +1,5 @@
-/*
+
+
 package com.conqueror.blacklist;
 
 import org.springframework.boot.SpringApplication;
@@ -8,7 +9,8 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 
-*/
+
+
 /**
  *
     * @ClassName: TomcatApplication
@@ -16,7 +18,9 @@ import org.springframework.context.annotation.ComponentScan;
     * @author Sven
     * @date 2017年9月8日
     *
- *//*
+ */
+/*
+
 
 @SpringBootApplication
 @ComponentScan({"com.conqueror.blacklist"})
@@ -35,3 +39,5 @@ public class TomcatApplication extends SpringBootServletInitializer{
     }
 }
 */
+
+

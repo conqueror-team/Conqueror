@@ -16,9 +16,15 @@ $(function () {
 			{ label: '是否开除', name: 'delflag', index: 'delflag', width: 80,formatter: function(value, options, row){
 				if(value===0){
 					return'<span class="label label-success">正常</span>';
-				}else{
+				}else if(value===1){
 					return'<span class="label label-danger">开除</span>';
-				}
+				}else if(value===2){
+                    return'<span class="label label-default">脱坑</span>';
+                }else if(value===3){
+                    return'<span class="label label-info">警告</span>';
+                }else if(value===4){
+                    return'<span class="label label-warning">严重警告</span>';
+                }
 			}}			
         ],
 		viewrecords: true,
@@ -140,7 +146,7 @@ var vm = new Vue({
                 return ;
             }
 
-            confirm('确定要开除选中的记录？', function(){
+            confirm('确定要开除选中的团长？', function(){
                 $.ajax({
                     type: "POST",
                     url: "../colonelinfo/expel",
@@ -157,6 +163,50 @@ var vm = new Vue({
                 });
             });
         },
+        warning:function(event){
+            var ids = getSelectedRows();
+            if(ids == null){
+                return ;
+            }
+            confirm('确定要警告选中的团长？', function(){
+                $.ajax({
+                    type: "POST",
+                    url: "../colonelinfo/warning",
+                    data: JSON.stringify(ids),
+                    success: function(r){
+                        if(r.code == 0){
+                            alert('操作成功', function(index){
+                                $("#jqGrid").trigger("reloadGrid");
+                            });
+                        }else{
+                            alert(r.msg);
+                        }
+                    }
+                });
+            });
+		},
+        cancelWarning:function(event){
+            var ids = getSelectedRows();
+            if(ids == null){
+                return ;
+            }
+            confirm('确定要取消警告选中的团长？', function(){
+                $.ajax({
+                    type: "POST",
+                    url: "../colonelinfo/cancelWarning",
+                    data: JSON.stringify(ids),
+                    success: function(r){
+                        if(r.code == 0){
+                            alert('操作成功', function(index){
+                                $("#jqGrid").trigger("reloadGrid");
+                            });
+                        }else{
+                            alert(r.msg);
+                        }
+                    }
+                });
+            });
+		},
 		getInfo: function(id){
 			$.get("../colonelinfo/info/"+id, function(r){
                 vm.colonelInfo = r.colonelInfo;

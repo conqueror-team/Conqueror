@@ -32,4 +32,8 @@ public interface ColonelInfoService {
     List<ColonelInfoEntity> queryList2(Map<String, Object> map);
 
     void expelBatch(Integer[] ids,String name);
+
+    void warningBatch(Integer[] ids, String name);
+
+	void cancelWarningBatch(Integer[] ids, String name);
 }

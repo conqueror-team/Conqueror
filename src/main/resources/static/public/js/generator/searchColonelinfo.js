@@ -23,11 +23,17 @@ $(function () {
                 return '<ol>'+html+"</ol>";
             } },
 			{ label: '是否开除', name: 'delflag', index: 'delflag', width: 80,formatter: function(value, options, row){
-				if(value===0){
-					return'<span class="label label-success">正常</span>';
-				}else{
-					return'<span class="label label-danger">开除</span>';
-				}
+                if(value===0){
+                    return'<span class="label label-success">正常</span>';
+                }else if(value===1){
+                    return'<span class="label label-danger">开除</span>';
+                }else if(value===2){
+                    return'<span class="label label-default">脱坑</span>';
+                }else if(value===3){
+                    return'<span class="label label-info">警告</span>';
+                }else if(value===4){
+                    return'<span class="label label-warning">严重警告</span>';
+                }
 			}}			
         ],
         sortable: false,

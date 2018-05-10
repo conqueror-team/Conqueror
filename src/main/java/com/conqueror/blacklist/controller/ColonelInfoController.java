@@ -134,4 +134,28 @@ public class ColonelInfoController extends AbstractController{
 
 		return R.ok();
 	}
+	/**
+	 * 开除
+	 */
+	@SysLog("团长警告-严重警告")
+	@RequestMapping("/warning")
+	@RequiresPermissions("colonelinfo:warning")
+	public R warning(@RequestBody Integer[] ids){
+		String name=getUser().getUsername();
+		colonelInfoService.warningBatch(ids,name);
+
+		return R.ok();
+	}
+	/**
+	 * 开除
+	 */
+	@SysLog("取消团长警告")
+	@RequestMapping("/cancelWarning")
+	@RequiresPermissions("colonelinfo:cancelWarning")
+	public R cancelWarning(@RequestBody Integer[] ids){
+		String name=getUser().getUsername();
+		colonelInfoService.cancelWarningBatch(ids,name);
+
+		return R.ok();
+	}
 }
