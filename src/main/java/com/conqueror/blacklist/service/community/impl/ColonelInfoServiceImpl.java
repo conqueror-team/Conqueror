@@ -82,4 +82,12 @@ public class ColonelInfoServiceImpl implements ColonelInfoService {
 		colonelInfoDao.cancelWarningBatch(map);
 	}
 
+	@Override
+	public void discard(Integer[] ids, String name) {
+		Map<String, Object> map=new HashMap<>();
+		map.put("ids",ids);
+		map.put("name",name);
+		colonelInfoDao.discard(map);
+	}
+
 }

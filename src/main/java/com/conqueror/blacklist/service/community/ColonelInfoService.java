@@ -36,4 +36,6 @@ public interface ColonelInfoService {
     void warningBatch(Integer[] ids, String name);
 
 	void cancelWarningBatch(Integer[] ids, String name);
+
+    void discard(Integer[] ids, String name);
 }

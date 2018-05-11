@@ -22,4 +22,6 @@ public interface ColonelInfoDao extends BaseDao<ColonelInfoEntity> {
     void warningBatch(Map<String, Object> map);
 
     void cancelWarningBatch(Map<String, Object> map);
+
+    void discard(Map<String, Object> map);
 }

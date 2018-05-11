@@ -135,7 +135,7 @@ public class ColonelInfoController extends AbstractController{
 		return R.ok();
 	}
 	/**
-	 * 开除
+	 * 团长警告
 	 */
 	@SysLog("团长警告-严重警告")
 	@RequestMapping("/warning")
@@ -147,7 +147,7 @@ public class ColonelInfoController extends AbstractController{
 		return R.ok();
 	}
 	/**
-	 * 开除
+	 * 取消团长警告
 	 */
 	@SysLog("取消团长警告")
 	@RequestMapping("/cancelWarning")
@@ -158,4 +158,17 @@ public class ColonelInfoController extends AbstractController{
 
 		return R.ok();
 	}
+	/**
+	 * 脱坑
+	 */
+	@SysLog("脱坑")
+	@RequestMapping("/discard")
+	@RequiresPermissions("colonelinfo:discard")
+	public R discard(@RequestBody Integer[] ids){
+		String name=getUser().getUsername();
+		colonelInfoService.discard(ids,name);
+
+		return R.ok();
+	}
+
 }

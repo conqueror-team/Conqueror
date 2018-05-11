@@ -149,7 +149,13 @@
 		</foreach>
 	</update>
 	<update id="cancelWarningBatch">
-		update cc_colonel_info set delflag=0,last_update_user_id=#{name},last_update_date=now() where (delflag=3 or delflag=4)and id in
+		update cc_colonel_info set delflag=0,last_update_user_id=#{name},last_update_date=now() where (delflag=2 or delflag=3 or delflag=4)and id in
+		<foreach item="id" collection="ids" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</update>
+	<update id="discard">
+		update cc_colonel_info set delflag=2,last_update_user_id=#{name},last_update_date=now() where (delflag!=1)and id in
 		<foreach item="id" collection="ids" open="(" separator="," close=")">
 			#{id}
 		</foreach>

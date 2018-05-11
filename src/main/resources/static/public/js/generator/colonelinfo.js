@@ -13,7 +13,7 @@ $(function () {
 			{ label: '创建时间', name: 'createDate', index: 'create_date', width: 80 }, 			
 			{ label: '最后修改人', name: 'lastUpdateUserId', index: 'last_update_user_id', width: 80 }, 			
 			{ label: '最后修改时间', name: 'lastUpdateDate', index: 'last_update_date', width: 80 }, 			
-			{ label: '是否开除', name: 'delflag', index: 'delflag', width: 80,formatter: function(value, options, row){
+			{ label: '状态', name: 'delflag', index: 'delflag', width: 80,formatter: function(value, options, row){
 				if(value===0){
 					return'<span class="label label-success">正常</span>';
 				}else if(value===1){
@@ -207,6 +207,28 @@ var vm = new Vue({
                 });
             });
 		},
+        discard:function(event){
+            var ids = getSelectedRows();
+            if(ids == null){
+                return ;
+            }
+            confirm('确定要脱坑选中的团长？', function(){
+                $.ajax({
+                    type: "POST",
+                    url: "../colonelinfo/discard",
+                    data: JSON.stringify(ids),
+                    success: function(r){
+                        if(r.code == 0){
+                            alert('操作成功', function(index){
+                                $("#jqGrid").trigger("reloadGrid");
+                            });
+                        }else{
+                            alert(r.msg);
+                        }
+                    }
+                });
+            });
+        },
 		getInfo: function(id){
 			$.get("../colonelinfo/info/"+id, function(r){
                 vm.colonelInfo = r.colonelInfo;

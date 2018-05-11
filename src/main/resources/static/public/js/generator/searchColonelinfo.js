@@ -22,7 +22,7 @@ $(function () {
                 }
                 return '<ol>'+html+"</ol>";
             } },
-			{ label: '是否开除', name: 'delflag', index: 'delflag', width: 80,formatter: function(value, options, row){
+			{ label: '状态', name: 'delflag', index: 'delflag', width: 80,formatter: function(value, options, row){
                 if(value===0){
                     return'<span class="label label-success">正常</span>';
                 }else if(value===1){

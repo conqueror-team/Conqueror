@@ -33,6 +33,7 @@
 			<a v-if="hasPermission('colonelinfo:update')" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
 			<a v-if="hasPermission('colonelinfo:cancelWarning')" class="btn btn-success" @click="cancelWarning"><i class="fa fa-exclamation-triangle"></i>&nbsp;取消警告</a>
 			<a v-if="hasPermission('colonelinfo:warning')" class="btn btn-warning" @click="warning"><i class="fa fa-exclamation-triangle"></i>&nbsp;警告</a>
+			<a v-if="hasPermission('colonelinfo:discard')" class="btn btn-info" style="background-color: #777;border-color: #777;" @click="discard"><i class="fa fa-ambulance"></i>&nbsp;脱坑</a>
 			<a v-if="hasPermission('colonelinfo:expel')" class="btn btn-danger" @click="expel"><i class="fa fa-ban"></i>&nbsp;开除</a>
 			<a v-if="hasPermission('colonelinfo:delete')" class="btn btn-danger" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
 		</div>
