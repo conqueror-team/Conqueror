@@ -27,7 +27,9 @@
 			<if test="name != null and name.trim() != ''">
 				and (bl.name like CONCAT(CONCAT('%',#{name}),'%') or bl.group_name like CONCAT(CONCAT('%',#{name}),'%'))
 			</if>
-			
+			<if test="status !=null and status.trim() !='' and status!='-1'">
+				and bl.status=#{status}
+			</if>
 		</where>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
@@ -48,10 +50,9 @@
 			<if test="name != null and name.trim() != ''">
 				and (bl.name like CONCAT(CONCAT('%',#{name}),'%') or bl.group_name like CONCAT(CONCAT('%',#{name}),'%'))
 			</if>
-			<if test="status != null and status.trim() != ''">
+			<if test="status != null and status.trim() != '' and status!='-1'">
 				and bl.status=#{status}
 			</if>
-			
 		</where>
 	</select>
 	 
@@ -61,7 +62,9 @@
 			<if test="name != null and name.trim() != ''">
 				and bl.name like CONCAT(CONCAT('%',#{name}),'%')
 			</if>
-			
+            <if test="status != null and status.trim() != ''">
+                and bl.status=#{status}
+            </if>
 		</where>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
@@ -85,7 +88,6 @@
 			<if test="status != null and status.trim() != ''">
 				and bl.status=#{status}
 			</if>
-			
 		</where>
 	</select>
 	 
@@ -131,11 +133,11 @@
 	</update>
 	
 	<delete id="delete">
-		delete from tb_black_list where id = #{value}
+		update tb_black_list set status=0 where id = #{value}
 	</delete>
 	
 	<delete id="deleteBatch">
-		delete from  tb_black_list where id in 
+		update  tb_black_list set status=0 where id in
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>

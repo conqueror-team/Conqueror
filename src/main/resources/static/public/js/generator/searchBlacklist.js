@@ -1,6 +1,6 @@
 $(function () {
 	$("#jqGrid").jqGrid({
-        url: '../blacklist/list',
+        url: '../blacklist/list?status=1',
         datatype: "json",
         colModel: [			
 			
@@ -51,8 +51,8 @@ $(function () {
         sortable: false,
 		viewrecords: true,
         height: 680,
-        rowNum: 12,
-		rowList : [12,20,30],
+        rowNum: 8,
+		rowList : [8,16,24],
         rownumbers: false, 
         rownumWidth: 25, 
         autowidth:true,
@@ -81,7 +81,7 @@ var vm = new Vue({
 	data:{
 		q:{
 			name: null,
-			status:''
+			status:'1'
 		},
 		showList: true,
 		title: null,
