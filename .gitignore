@@ -1,0 +1,70 @@
+# Eclipse project files
+.classpath
+.project
+.settings/
+.metadata
+
+# Intellij project files
+*.iml
+.idea/
+
+# hibernate & Spring files
+.myhibernatedata
+hibernate.cfg.xml
+hibernate.reveng.xml
+.springBeans
+
+# Others
+target/
+logs/
+bak/
+reports/
+RemoteSystemsTempFiles/
+Servers/
+/src/main/webapp/WEB-INF/classes/*
+/src/main/webapp/userfiles/*
+.mymetadata
+.checkstyle
+
+.DS_Store
+.tern-project
+.war
+.zip
+.rar
+
+.externalToolBuilders/
+build/
+*.bak
+
+*.ldb
+config/local.properties
+*.xls
+*.orig
+
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+/mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+application-local.yml
