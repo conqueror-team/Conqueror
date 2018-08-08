@@ -5,7 +5,7 @@
     <groupId>com.conqueror.blacklist</groupId>
     <artifactId>Conqueror</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <name>Conqueror</name>
     <url>http://maven.apache.org</url>
@@ -193,11 +193,41 @@
     </dependencies>
 
 
-    <!--server config tomcat -->
+
     <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>utf-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>springloaded</artifactId>
+                        <version>1.2.6.RELEASE</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+
+
+    <!--server config tomcat -->
+    <!--<build>
         <finalName>Conqueror</finalName>
         <plugins>
-            <!-- 打包插件 -->
+            &lt;!&ndash; 打包插件 &ndash;&gt;
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -206,13 +236,13 @@
                     <warSourceDirectory>src/main/webapp</warSourceDirectory>
                 </configuration>
             </plugin>
-            <!-- 编译插件 -->
+            &lt;!&ndash; 编译插件 &ndash;&gt;
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
-                    <!--设置jdk的版本-->
+                    &lt;!&ndash;设置jdk的版本&ndash;&gt;
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                     <encoding>UTF-8</encoding>
@@ -220,14 +250,14 @@
                     <showWarnings>true</showWarnings>
                     <compilerArgument>-Xlint:unchecked</compilerArgument>
                     <compilerArguments>
-                        <!--bootclasspath windows-->
+                        &lt;!&ndash;bootclasspath windows&ndash;&gt;
                         <bootclasspath>${java.home}/lib/rt.jar;${java.home}/lib/jce.jar</bootclasspath>
-                        <!--bootclasspath mac-->
-                        <!--<bootclasspath>${java.home}/lib/rt.jar:${java.home}/lib/jce.jar</bootclasspath>-->
-                        <!--extdirs Windows下分隔符-->
+                        &lt;!&ndash;bootclasspath mac&ndash;&gt;
+                        &lt;!&ndash;<bootclasspath>${java.home}/lib/rt.jar:${java.home}/lib/jce.jar</bootclasspath>&ndash;&gt;
+                        &lt;!&ndash;extdirs Windows下分隔符&ndash;&gt;
                         <extdirs>src\main\webapp\WEB-INF\lib</extdirs>
-                        <!--extdirs Mac下分隔符-->
-                        <!--<extdirs>src/main/webapp/WEB-INF/lib</extdirs>-->
+                        &lt;!&ndash;extdirs Mac下分隔符&ndash;&gt;
+                        &lt;!&ndash;<extdirs>src/main/webapp/WEB-INF/lib</extdirs>&ndash;&gt;
                     </compilerArguments>
                 </configuration>
             </plugin>
@@ -235,20 +265,20 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <!--fork : 如果没有该项配置，不使用devtools不会起作用，即应用不会restart -->
+                    &lt;!&ndash;fork : 如果没有该项配置，不使用devtools不会起作用，即应用不会restart &ndash;&gt;
                     <fork>true</fork>
                 </configuration>
             </plugin>
-            <!--插件4 maven docker 插件 -->
-            <!-- tag::plugin[] -->
+            &lt;!&ndash;插件4 maven docker 插件 &ndash;&gt;
+            &lt;!&ndash; tag::plugin[] &ndash;&gt;
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.4.13</version>
                 <configuration>
                     <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
-                    <dockerDirectory>${project.basedir}</dockerDirectory><!--指定dockerfile目录-->
-                    <!--docker服务器地址必填-->
+                    <dockerDirectory>${project.basedir}</dockerDirectory>&lt;!&ndash;指定dockerfile目录&ndash;&gt;
+                    &lt;!&ndash;docker服务器地址必填&ndash;&gt;
                     <dockerHost></dockerHost>
                     <resources>
                         <resource>
@@ -259,9 +289,9 @@
                     </resources>
                 </configuration>
             </plugin>
-            <!-- end::plugin[] -->
+            &lt;!&ndash; end::plugin[] &ndash;&gt;
         </plugins>
-    </build>
+    </build>-->
 
     <repositories>
         <repository>

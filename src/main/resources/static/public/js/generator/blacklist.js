@@ -51,9 +51,9 @@ $(function () {
             { label: '修改时间', name: 'updateTime', index: 'update_time', width: 80 }
         ],
 		viewrecords: true,
-        height: 700,
-        rowNum: 8,
-		rowList : [8,16,24],
+        height: 500,
+        rowNum: 6,
+		rowList : [6,12,24],
         rownumbers: true, 
         rownumWidth: 25, 
         autowidth:true,
