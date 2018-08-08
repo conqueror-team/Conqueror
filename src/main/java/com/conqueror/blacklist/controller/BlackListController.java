@@ -1,16 +1,5 @@
 package com.conqueror.blacklist.controller;
 
-import java.util.List;
-import java.util.Map;
-
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.conqueror.blacklist.entity.blacklist.BlackListEntity;
 import com.conqueror.blacklist.service.BlackListService;
 import com.conqueror.blacklist.utils.PageUtils;
@@ -20,6 +9,13 @@ import com.conqueror.blacklist.utils.annotation.SysLog;
 import com.conqueror.blacklist.utils.validator.ValidatorUtils;
 import com.conqueror.blacklist.utils.validator.group.AddGroup;
 import com.conqueror.blacklist.utils.validator.group.UpdateGroup;
+import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -41,6 +37,8 @@ public class BlackListController extends AbstractController {
 	@RequestMapping("/list")
 //	@RequiresPermissions("blacklist:list")
 	public R list(@RequestParam Map<String, Object> params){
+		if(params.get("status")==null||StringUtils.isEmpty(params.get("status").toString())||params.get("status").toString().trim().equals("1"))
+		params.put("status","1");
 		//查询列表数据
         Query query = new Query(params);
 
@@ -87,6 +85,7 @@ public class BlackListController extends AbstractController {
 	@RequiresPermissions("blacklist:update")
 	public R update(@RequestBody BlackListEntity blackList){
 		ValidatorUtils.validateEntity(blackList, UpdateGroup.class);
+        blackList.setUpdateUserName(getUser().getUsername());
 		blackListService.update(blackList);
 		
 		return R.ok();
@@ -99,7 +98,7 @@ public class BlackListController extends AbstractController {
 	@RequestMapping("/delete")
 	@RequiresPermissions("blacklist:delete")
 	public R delete(@RequestBody Integer[] ids){
-		blackListService.deleteBatch(ids);
+		blackListService.deleteBatch(ids,getUser().getUsername());
 		
 		return R.ok();
 	}

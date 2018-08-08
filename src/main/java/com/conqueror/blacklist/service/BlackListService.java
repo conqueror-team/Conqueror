@@ -1,9 +1,9 @@
 package com.conqueror.blacklist.service;
 
+import com.conqueror.blacklist.entity.blacklist.BlackListEntity;
+
 import java.util.List;
 import java.util.Map;
-
-import com.conqueror.blacklist.entity.blacklist.BlackListEntity;
 
 /**
  * 黑名单
@@ -26,7 +26,7 @@ public interface BlackListService {
 	
 	void delete(Integer id);
 	
-	void deleteBatch(Integer[] ids);
+	void deleteBatch(Integer[] ids,String updateUserName);
 	
 	List<BlackListEntity> queryList2(Map<String, Object> map);
 	

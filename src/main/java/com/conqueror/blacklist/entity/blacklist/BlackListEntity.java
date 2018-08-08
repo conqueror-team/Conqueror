@@ -1,12 +1,11 @@
 package com.conqueror.blacklist.entity.blacklist;
 
-import java.io.Serializable;
-import java.util.Date;
-
-import org.hibernate.validator.constraints.NotBlank;
-
 import com.conqueror.blacklist.utils.validator.group.AddGroup;
 import com.conqueror.blacklist.utils.validator.group.UpdateGroup;
+import org.hibernate.validator.constraints.NotBlank;
+
+import java.io.Serializable;
+import java.util.Date;
 
 
 
@@ -46,6 +45,10 @@ public class BlackListEntity implements Serializable {
 	private String createUserName;
 	//创建时间
 	private Date createTime;
+	//修改人姓名
+	private String updateUserName;
+	//修改时间
+	private Date updateTime;
 
 	/**
 	 * 设置：主键
@@ -161,4 +164,20 @@ public class BlackListEntity implements Serializable {
 	public void setSeverity(int severity) {
 		this.severity = severity;
 	}
+
+    public String getUpdateUserName() {
+        return updateUserName;
+    }
+
+    public void setUpdateUserName(String updateUserName) {
+        this.updateUserName = updateUserName;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
 }

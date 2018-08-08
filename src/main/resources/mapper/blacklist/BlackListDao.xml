@@ -15,6 +15,8 @@
         <result property="severity" column="severity"/>
         <result property="createUserId" column="create_user_id"/>
         <result property="createTime" column="create_time"/>
+		<result property="updateUserName" column="update_user_name"/>
+		<result property="updateTime" column="update_time"/>
     </resultMap>
 
 	<select id="queryObject" resultType="com.conqueror.blacklist.entity.blacklist.BlackListEntity">
@@ -127,7 +129,9 @@
 			<if test="groupName != null">`group_name` = #{groupName}, </if>
 			<if test="severity != null">`severity` = #{severity}, </if>
 			<if test="createUserId != null">`create_user_id` = #{createUserId}, </if>
-			<if test="createTime != null">`create_time` = #{createTime}</if>
+			<if test="createTime != null">`create_time` = #{createTime},</if>
+			<if test="updateUserName != null">`update_user_name` = #{updateUserName},</if>
+			<if test="updateUserName != null">update_time=now()</if>
 		</set>
 		where id = #{id}
 	</update>
@@ -135,10 +139,15 @@
 	<delete id="delete">
 		update tb_black_list set status=0 where id = #{value}
 	</delete>
-	
 	<delete id="deleteBatch">
 		update  tb_black_list set status=0 where id in
 		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+	<delete id="deleteBatch2">
+		update  tb_black_list set status=0,update_user_name=#{updateUserName},update_time=now() where id in
+		<foreach item="id" collection="ids" open="(" separator="," close=")">
 			#{id}
 		</foreach>
 	</delete>

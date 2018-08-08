@@ -46,7 +46,9 @@ $(function () {
 			}},
 			
 			{ label: '创建人', name: 'createUserName', width: 80 }, 			
-			{ label: '创建时间', name: 'createTime', index: 'create_time', width: 80 }			
+			{ label: '创建时间', name: 'createTime', index: 'create_time', width: 80 },
+            { label: '修改人', name: 'updateUserName', width: 80 },
+            { label: '修改时间', name: 'updateTime', index: 'update_time', width: 80 }
         ],
 		viewrecords: true,
         height: 700,
@@ -192,16 +194,36 @@ var vm = new Vue({
 				return ;
 			}
 			confirm('确定要删除选中的记录？', function(){
+                $.ajax({
+                    type: "POST",
+                    url: "../blacklist/delete",
+                    data: JSON.stringify(ids),
+                    success: function(r){
+                        if(r.code == 0){
+                            alert('操作成功', function(index){
+                                // $("#jqGrid").trigger("reloadGrid");
+                                window.location.reload();
+                            });
+                        }else{
+                            alert(r.msg);
+                        }
+                    }
+                });
+
+
+
+				/*
 				var k=0;
 				for(var j=0;j<ids.length;j++){
 					$.get("../blacklist/info/"+ids[j], function(r){
+						//删除图片
 						if(r.blackList&&r.blackList.imgUrl){
 							 var imgUrls=r.blackList.imgUrl.split(',');
 							 for(var i=0;i<imgUrls.length;i++){
 								 var params = {
-										  Bucket : Bucket,                        /* 必须 */
-										  Region : Region,                        /* 必须 */
-										  Key : imgUrls[i]                            /* 必须 */
+										  Bucket : Bucket,                        /!* 必须 *!/
+										  Region : Region,                        /!* 必须 *!/
+										  Key : imgUrls[i]                            /!* 必须 *!/
 										};
 								 cos.deleteObject(params, function(err, data) {
 									  if(err) {
@@ -232,6 +254,7 @@ var vm = new Vue({
 						  }
 		            });
 				}
+				*/
 				
 			});
 		},

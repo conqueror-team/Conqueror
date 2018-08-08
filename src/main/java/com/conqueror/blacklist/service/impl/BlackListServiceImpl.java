@@ -1,15 +1,14 @@
 package com.conqueror.blacklist.service.impl;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.conqueror.blacklist.dao.blacklist.BlackListDao;
 import com.conqueror.blacklist.entity.blacklist.BlackListEntity;
 import com.conqueror.blacklist.service.BlackListService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 
 
@@ -49,8 +48,8 @@ public class BlackListServiceImpl implements BlackListService {
 	}
 	
 	@Override
-	public void deleteBatch(Integer[] ids){
-		blackListDao.deleteBatch(ids);
+	public void deleteBatch(Integer[] ids,String updateUserName){
+		blackListDao.deleteBatch2(ids,updateUserName);
 	}
 
 	@Override

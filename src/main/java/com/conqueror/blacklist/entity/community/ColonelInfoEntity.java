@@ -46,6 +46,11 @@ public class ColonelInfoEntity implements Serializable {
 	private Date lastUpdateDate;
 	//删除标识:0：正常，1:开除,2:脱坑,3:警告4:严重警告
 	private Integer delflag;
+	//yy号
+    @NotBlank(message="yy号不能为空", groups = {AddGroup.class, UpdateGroup.class})
+	private String yy;
+	//手机号码
+	private String mobile;
 
 	/**
 	 * 设置：
@@ -179,5 +184,20 @@ public class ColonelInfoEntity implements Serializable {
 	public Integer getDelflag() {
 		return delflag;
 	}
-	
+
+    public String getYy() {
+        return yy;
+    }
+
+    public void setYy(String yy) {
+        this.yy = yy;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
 }
