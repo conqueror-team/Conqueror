@@ -9,6 +9,7 @@ import com.conqueror.blacklist.utils.annotation.IgnoreAuth;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,7 +38,8 @@ public class APIBlackListController {
 		params.put("name", name);
 		params.put("page", page);
 		params.put("limit", limit);
-		params.put("status","0");
+		if(params.get("status")==null|| StringUtils.isEmpty(params.get("status").toString())||params.get("status").toString().trim().equals("1"))
+		params.put("status","1");
 		params.put("sidx", "");
 		params.put("order", "desc");
 		//查询列表数据
@@ -60,7 +62,8 @@ public class APIBlackListController {
 			@ApiParam("条数") @RequestParam(defaultValue = "10", required = false) Integer limit){
 		Map<String, Object> params=new HashMap<>();
 		params.put("name", name);
-        params.put("status","0");
+        if(params.get("status")==null||StringUtils.isEmpty(params.get("status").toString())||params.get("status").toString().trim().equals("1"))
+        params.put("status","1");
 		params.put("page", page);
 		params.put("limit", limit);
 		params.put("sidx", "");
